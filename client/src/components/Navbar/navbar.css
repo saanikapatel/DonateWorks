@@ -1,0 +1,84 @@
+.header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  width: 100%;
+  padding: 1rem;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(2, 15, 29, 0.242);
+}
+.header .logo {
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+.header .logo .icon {
+  font-size: 25px;
+  color: lightcoral;
+  transform: translateY(5px);
+}
+@media screen and (max-width: 768px) {
+  .header .navBar {
+    position: absolute;
+    background: white;
+    height: -moz-max-content;
+    height: max-content;
+    width: 80%;
+    border-radius: 1rem;
+    top: -500rem;
+    left: 50%;
+    padding: 1rem;
+    transform: translate(-50%);
+    z-index: 2000;
+    box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
+    transition: 0.5s ease-in-out;
+  }
+  .header .navBar .navLists {
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    padding: 0.5rem 0;
+  }
+  .header .navBar .navLists .navItem {
+    padding: 0.5rem 0;
+  }
+  .header .navBar .navLists .navItem .navLink {
+    color: black;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .header .navBar .navLists .navItem .navLink:hover {
+    color: lightcoral;
+  }
+  .header .navBar .navLists .btn {
+    margin-top: 1rem;
+  }
+  .header .navBar .navLists .btn a {
+    font-weight: 600;
+    color: white;
+  }
+  .header .navBar .closeNavBar {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    color: lightcoral;
+  }
+  .header .navBar .closeNavBar:hover {
+    color: black;
+  }
+  .header .activeNavbar {
+    top: 7rem;
+  }
+}
+.header .toggleNavbar .icon {
+  font-size: 25px;
+  color: lightcoral;
+}
+.header .toggleNavbar:hover.icon {
+  color: white;
+}/*# sourceMappingURL=navbar.css.map */
