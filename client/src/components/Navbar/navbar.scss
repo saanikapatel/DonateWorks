@@ -1,13 +1,22 @@
+.navBarSection {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #F0E6D6; 
+}
+
 .header{
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: white;
-    width: 100%;
-    padding: 1rem;
+    background: #F0E6D6;
+    width: 95%;
+    padding: 0.5rem;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(2, 15, 29, 0.242);
+    border-radius: 50px;
+    margin: 1.5rem 0;
 
     .logo{
         color: black;
@@ -95,5 +104,37 @@
             color: white;
         }
 
+    }
+}
+
+@media screen and (min-width: 769px){
+    .toggleNavbar, .closeNavBar{
+        display: none;
+    }
+
+    .header{
+        padding: .5rem 1rem;
+
+        
+        .navLists{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+
+            .navItem{
+                .navLink{
+                    padding: 0 0.45rem;
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                    color: black;
+
+                    &:hover{
+                        color: lightcoral;
+                    }
+                }
+            }
+        }
+        
     }
 }

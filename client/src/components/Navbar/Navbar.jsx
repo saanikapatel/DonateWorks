@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 import './navbar.css'
 import { BiSolidDonateHeart } from "react-icons/bi";
 import { IoIosCloseCircleOutline } from "react-icons/io";
@@ -11,7 +12,7 @@ const Navbar = () => {
     const showNav = () => {
         setActive('navBar activeNavbar')
     }
-
+ 
     // remove navbar
     const removeNav = () => {
         setActive('navBar')
@@ -30,7 +31,8 @@ const Navbar = () => {
             <div className={active}>
                 <ul className="navLists flex">
                     <li className="navItem">
-                        <a href="#" className="navLink">Home</a>
+                        <Link to="/" className='navLink'>Home</Link>
+                        {/* <a href="#" className="navLink">Home</a> */}
                     </li>
                     <li className="navItem">
                         <a href="#" className="navLink">About Us</a>
@@ -40,11 +42,12 @@ const Navbar = () => {
                     </li>
 
                     <button className="btn">
-                        <a href="#">Login/Register</a>
+                        <Link to="/login">Login/Register</Link>
+                        {/* <a href="#">Login/Register</a> */}
                     </button>
                 </ul>
 
-                <div onClick={removeNav}className="closeNavBar">
+                <div onClick={removeNav} className="closeNavBar">
                 <IoIosCloseCircleOutline className='icon'/>
                 </div>
             </div>

@@ -96,4 +96,8 @@ input{
   box-sizing: border-box;
 }
 
+.tab {
+  display: none;
+}
+
 

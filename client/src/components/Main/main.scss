@@ -1,0 +1,124 @@
+.main{
+    width: 100%;
+    // position: relative;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 4rem;
+
+    .secTitle{
+        .title{
+            position: relative;
+            width: max-content;
+            margin: 1rem 0;
+            z-index: 2;
+            font-size: 2rem;  
+        }
+    }
+
+        // justify-content: center;
+        // gap: 1.5rem;
+
+        // .singleCard{
+        //     height: 80%;
+        //     display: grid;
+        //     border-radius: 10px;
+        //     align-items: center;
+        //     box-shadow: 0 2px 4px rgba(100, 100, 101, 0.549);
+        //     overflow: hidden;
+        //     margin: 0; //2rem
+
+        //     .imageDiv{
+        //         height: 100%;
+        //         width: 100%;
+        //         overflow: hidden;
+               
+
+        //         img{
+        //             height: 100%;
+        //             width: 100%;
+        //             object-fit: cover;
+        //         }
+        //     }
+
+        //     .cardInfo{
+        //         padding: 1rem;
+
+        //         .desTitle{
+        //             color: black;
+        //             font-size: 1.25rem;
+        //         }
+
+        //         .desc{
+        //             font-size: 13.5px;
+        //             font-weight: 500;
+
+        //         }
+        //     }
+        // }
+
+        .secContent{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+
+            .singleCard{
+                width: 22rem;
+                height: 25rem;
+                padding: 1.1rem;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 2px 4px rgba(100, 100, 101, 0.549);
+                margin: 0 3rem;
+
+                img{
+                    width: 100%;
+                    height: 14rem;
+                    object-fit: contain;
+                }
+
+                .cardInfo{
+                        padding: 1rem;
+                        text-align: center;
+                        font-size: 1.1rem;
+            
+                    //         .desTitle{
+                    //             color: black;
+                    //             font-size: 1.25rem;
+                    //         }
+            
+                    //         .desc{
+                    //             font-size: 13.5px;
+                    //             font-weight: 500;
+            
+                    //         }
+                    //     }
+            }
+        }
+
+        
+    }
+}
+
+// @media screen and (min-width: 768px){
+//     .secContent{
+//         grid-template-columns: repeat(3, 1fr);
+
+//         .singleCard{
+//             height: auto;
+//             margin: 1rem;
+//         }
+//     }
+// }
+
+// @media screen and (min-width: 900px){
+//     .secContent{
+        
+//         .singleCard{
+//             height: auto;
+//             margin: 2rem;
+//         }
+//     }
+// }

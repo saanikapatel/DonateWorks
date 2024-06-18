@@ -5,6 +5,8 @@
     align-items: center;
     justify-content: center;
     margin: auto;
+    height: 90vh;
+    
 
     .overlay{
         position: absolute;
@@ -16,7 +18,7 @@
         z-index: 1;
         mix-blend-mode: hard-light;
     }
-
+ 
     video{
         position: absolute;
         height: 100%;
@@ -41,17 +43,26 @@
 
         .textDiv{
             padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
 
             .smallText{
-                font-size: 13px;
-                text-transform: uppercase;
+                font-size: 3rem;
+                text-align: center;
+                color: white;
             }
 
             .homeTitle{
                 position: relative;
                 font-size: 1rem;
+                padding: 0.5rem 0.8rem;
+                width: 15%;
+                
             }
         }
 
     }
 }
+

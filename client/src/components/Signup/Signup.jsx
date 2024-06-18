@@ -14,7 +14,7 @@ const Signup = () => {
     Axios.post("http://localhost:4000/auth/signup", {
       username, 
       email,
-      password
+      password 
     }).then(response => {
       console.log(response);
     }).catch(err => {
