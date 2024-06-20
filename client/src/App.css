@@ -70,7 +70,7 @@ body{
   background: lightcoral;
 }
 
-.sign-up-container{
+/* .sign-up-container{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,14 +78,14 @@ body{
 }
 
 .sign-up-form{
-  width: 20rem;
+  
   padding: 1rem;
   border: 1px solid black;
   border-radius: 8px;
-}
+} */
 
 label{
-  display: block;
+  
   margin-top: 1rem;
 }
 

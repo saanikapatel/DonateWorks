@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 const UserSignup = () => {
   const [formStep, setFormStep] = useState(0);
   const { register, handleSubmit, formState: { errors, isValid } } = useForm({ mode: "all" });
-
+ 
   const title = ["Sign Up", "Additional Info"];
 
   const completeFormStep = () => {
