@@ -42,7 +42,7 @@ const Navbar = () => {
                     </li>
 
                     <button className="btn">
-                        <Link to="/login">Login/Register</Link>
+                        <Link to="/userSignup">Login/Register</Link>
                         {/* <a href="#">Login/Register</a> */}
                     </button>
                 </ul>
