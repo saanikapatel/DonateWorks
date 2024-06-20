@@ -5,7 +5,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 dotenv.config();
 // import {UserRouter} from './routes/user.js';
-import {DonorRouter} from './routes/donor.js';
+import {DonationRouter} from './routes/donation.js';
 import { DonatorRouter } from './routes/donator.js';
 
 const app = express();
@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_URI)
 })
 
 app.use('/auth', DonatorRouter);
-app.use('/', DonorRouter);
+app.use('/', DonationRouter);
 
 
 

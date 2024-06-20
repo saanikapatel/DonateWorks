@@ -1,0 +1,28 @@
+.donation-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    /* height: 100vh; */
+  }
+.donation-form {
+    margin: 8rem 0;
+    width: 30rem;
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.donate-item-info{
+    display: flex;
+    align-items: center;
+}
+
+.custom-checkbox {
+  display: inline-block;
+  width: auto;
+  margin: 0 0 0 8px;
+  padding: 10px 0;
+}
+

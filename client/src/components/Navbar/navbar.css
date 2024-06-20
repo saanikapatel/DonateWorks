@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  background-color: #F0E6D6; /* Optional: Add background color */
+  background-color: #F0E6D6;
 }
 
 .header {
@@ -16,7 +16,7 @@
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(2, 15, 29, 0.242);
   border-radius: 50px;
-  margin: 1.5rem auto;
+  margin: 1.5rem 0;
 }
 .header .logo {
   color: black;
