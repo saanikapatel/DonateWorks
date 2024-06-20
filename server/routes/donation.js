@@ -1,6 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
-import {Donor} from '../models/Donor.js';
+import {Donation} from '../models/Donation.js';
 import jwt from 'jsonwebtoken';
 
 const router = express.Router();
@@ -12,7 +12,7 @@ router.post('/donate', async (req, res) => {
     //     return res.json({message: "user already exists"});
     // }
  
-    const newDonation = new Donor({
+    const newDonation = new Donation({
         items, 
         name,
         address,
@@ -23,4 +23,4 @@ router.post('/donate', async (req, res) => {
     return res.json({message: "record registered"});
 })
 
-export {router as DonorRouter};
+export {router as DonationRouter};
