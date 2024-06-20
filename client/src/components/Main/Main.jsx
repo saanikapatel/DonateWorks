@@ -57,7 +57,7 @@ const Main = () => {
       </div>
 
       <div>
-        T
+        
       </div>
     </section>
 
