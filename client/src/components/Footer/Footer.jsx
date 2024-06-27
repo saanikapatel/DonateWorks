@@ -6,9 +6,9 @@ import { IoIosSend } from "react-icons/io";
 const Footer = () => {
   return (
     <section className="footer">
-      <div className="videoDiv">
+      {/* <div className="videoDiv">
       <video src={video} muted autoPlay loop type='video/mp4'></video>
-      </div>
+      </div> */}
 
       <div className="secContent container">
         <div className="contactDiv flex">

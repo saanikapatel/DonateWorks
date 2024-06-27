@@ -1,11 +1,18 @@
 import { Link } from "react-router-dom";
+import choose_donator from '../assets/choose_donator.jpg';
+import choose_ngo from '../assets/choose_ngo.jpg';
 
 const Choose = () => {
     return (  
-        <div>
-            <button><Link to="/userSignup">Join as a donator</Link></button>
-            <br />
-            <button><Link to="/ngoLogin">Joins as an NGO</Link></button>
+        <div className="choose-container">
+            <div className="choose-item">
+                <img src={choose_donator} alt="" className="choose-item-img" />
+                <button className="btn"><Link to="/userSignup">Join as a donator</Link></button>
+            </div>
+            <div className="choose-item">
+                <img src={choose_ngo} alt="" className="choose-item-img" />
+                <button className="btn"><Link to="/ngoLogin">Joins as an NGO</Link></button>
+            </div>
         </div>
     );
 }

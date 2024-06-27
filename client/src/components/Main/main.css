@@ -1,42 +1,62 @@
 .main {
   width: 100%;
-  background-color: white;
+  position: relative;
+  background-color: #FAF6F1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 4rem;
+  padding: 2rem 0;
+  z-index: 10;
 }
-.main .secTitle .title {
+.main .steps-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #eee6da;
+  width: 95%;
+  border-radius: 10px;
+  padding: 2rem;
+}
+.main .steps-container .secTitle .title {
   position: relative;
   width: -moz-max-content;
   width: max-content;
-  margin: 1rem 0;
   z-index: 2;
-  font-size: 2rem;
+  font-size: 2.3rem;
+  color: #4B4643;
 }
-.main .secContent {
+.main .steps-container .secContent {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 1rem;
 }
-.main .secContent .singleCard {
-  width: 22rem;
-  height: 25rem;
-  padding: 1.1rem;
-  border-radius: 10px;
+.main .steps-container .secContent .singleCard {
+  width: 18rem;
+  height: 18rem;
+  padding: 1rem;
+  border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(100, 100, 101, 0.549);
-  margin: 0 3rem;
+  border: 1.6px solid #817D7A;
+  margin: 0.5rem 3rem;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.main .secContent .singleCard img {
+.main .steps-container .secContent .singleCard .card-icon {
+  font-size: 5rem;
   width: 100%;
-  height: 14rem;
-  -o-object-fit: contain;
-     object-fit: contain;
+  color: #4B4643;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 0.5rem;
 }
-.main .secContent .singleCard .cardInfo {
+.main .steps-container .secContent .singleCard .cardInfo {
   padding: 1rem;
   text-align: center;
   font-size: 1.1rem;
+  color: #4B4643;
 }/*# sourceMappingURL=main.css.map */

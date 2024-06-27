@@ -9,8 +9,8 @@ const Home = () => {
     <>
     <section className="home">
       <div className="overlay"></div>
-      <div>
-      <video src={video} muted autoPlay loop type='video/mp4'></video> 
+      <div className='video-container'>
+      <video src={video} muted autoPlay loop type='video/mp4' id="background-video"></video> 
 
       </div>
         
@@ -19,11 +19,12 @@ const Home = () => {
             <h1 className="smallText">
               Be a reason someone smiles!
             </h1>
-            <button className="homeTitle btn"><Link to="/choose">Donate Now</Link></button>
+            <button className="homeTitle btn home-button"><Link to="/choose">Join us</Link></button>
           </div>
-        </div> 
+        </div>
     </section>
-    <Main/>
+        <Main/> 
+    
 
     </>
     
