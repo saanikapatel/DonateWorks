@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+} 
 
 .donation-form {
   background-color: white;
@@ -21,10 +21,23 @@
     width: 10rem;
 }
 
+.step-number{
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50px;
+  background-color: #A2CC97;
+  text-align: center;
+}
+
 .custom-checkbox {
   display: inline-block;
   width: auto;
   margin: 9px 8px 0 0;
   padding: 10px 0;
+}
+
+.error{
+  color: red;
+  font-size: 0.7rem;
 }
 
