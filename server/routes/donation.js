@@ -6,21 +6,20 @@ import jwt from 'jsonwebtoken';
 const router = express.Router();
 
 router.post('/donate', async (req, res) => {
-    const {items, name, address, phone} = req.body;
-    // const user = await User.findOne({email});
-    // if(user){
-    //     return res.json({message: "user already exists"});
-    // }
- 
-    const newDonation = new Donation({
-        items, 
-        name,
-        address,
-        phone
-    })
+    try {
+        const formData = req.body; // Assuming formData is sent from the client
 
-    await newDonation.save();
-    return res.json({message: "record registered"});
-})
+        // Create a new Donation document based on the schema
+        const newDonation = new Donation(formData);
+
+        // Save the new donation to MongoDB
+        await newDonation.save();
+
+        res.status(201).json({ message: 'Donation saved successfully', donation: newDonation });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error saving donation' });
+    }
+});
 
 export {router as DonationRouter};
