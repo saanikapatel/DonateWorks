@@ -3,7 +3,7 @@ import "../css/UserForm.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-const UserLogin = () => {
+const NgoLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,7 +14,7 @@ const UserLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/auth/userLogin", {
+      .post("http://localhost:4000/auth/ngoLogin", {
         email,
         password,
       })
@@ -48,11 +48,11 @@ const UserLogin = () => {
         />
 
         <button type="submit" className="userFormButton">Login</button>
-        <p>Don't have an account? <Link to="/userSignup">Signup</Link></p>
+        {/* <p>Not registered with us? <Link to="/userSignup">Signup</Link></p> */}
       </form>
     </div>
   );
 };
 
-export default UserLogin;
+export default NgoLogin;
 
