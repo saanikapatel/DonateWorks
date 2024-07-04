@@ -23,8 +23,15 @@ router.post("/userSignup", async (req, res) => {
   });
 
   await newUser.save();
-  return res.json({ status: true, message: "Record registered!" });
+
+  const token = jwt.sign({ username: newUser.username }, process.env.KEY, {
+    expiresIn: "1h",
+  });
+
+  res.cookie("token", token, { httpOnly: true, maxAge: 3600000 });
+  return res.json({ status: true, message: "Record registered!", token });
 });
+
 
 
 router.post("/userLogin", async (req, res) => {

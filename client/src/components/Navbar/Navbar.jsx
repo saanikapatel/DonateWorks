@@ -43,7 +43,6 @@ const Navbar = () => {
 
                     <button className="btn">
                         <Link to="/userSignup">Login/Register</Link>
-                        {/* <a href="#">Login/Register</a> */}
                     </button>
                 </ul>
 
