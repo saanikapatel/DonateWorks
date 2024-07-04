@@ -16,7 +16,7 @@ const DonationSchema = new mongoose.Schema({
             childrenAgeGroups: ChildrenAgeGroupsSchema,
             description: String
         }
-    ],
+    ], 
     season: {
         summer: Boolean,
         winter: Boolean,
@@ -29,7 +29,11 @@ const DonationSchema = new mongoose.Schema({
         needsMinorRepairs: Boolean
     },
     specialInstructions: String,
-    preferredDay: String
+    preferredDay: String,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 })
 
 const DonationModel = mongoose.model("Donation", DonationSchema);
