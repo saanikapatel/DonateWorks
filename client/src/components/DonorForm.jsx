@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
 import "./css/donorForm.css";
+import form_clothes from '../assets/form_image2.jpg';
 
 const DonorForm = () => {
 
@@ -8,6 +9,7 @@ const DonorForm = () => {
         clothingItems: [
             { type: 'menClothes', selected: false },
             { type: 'womenClothes', selected: false },
+            { type: 'blanketsShawls', selected: false },
             {
                 type: 'childrenClothes', selected: false, childrenAgeGroups: {
                     '3-5': false,
@@ -17,7 +19,6 @@ const DonorForm = () => {
                     '16-18': false,
                 }
             },
-            { type: 'blanketsShawls', selected: false },
             { type: 'other', selected: false, description: '' },
         ],
         season: {
@@ -39,13 +40,35 @@ const DonorForm = () => {
 
 
     const nextFormStep = () => {
-        const { clothingItems, season, quantity, condition } = formData;
+        const { clothingItems, season, quantity, condition, preferredDay } = formData;
+        const childrenItem = clothingItems.find(item => item.type === 'childrenClothes');
+        const otherItem = clothingItems.find(item => item.type === 'other');
         if (!validateForm() && currentTab === 0) {
-            setFormError('Please select at least one option.');
+            setFormError('Please select atleast one option.');
             return;
         }
-        if (!validateForm() && currentTab === 1) {
-            setFormError('*Required');
+        if (!validateForm() && currentTab === 0 && (otherItem.selected && otherItem.description === '')) {
+            setFormError('Please provide details.');
+            return;
+        }
+        if (!validateForm() && currentTab === 0 && (childrenItem.selected && !Object.values(childrenItem.childrenAgeGroups).some(val => val))) {
+            setFormError('Please select atleast one age group.');
+            return;
+        }
+        if (!validateForm() && currentTab === 1 && !Object.values(season).some(val => val)) {
+            setFormError('Please select atleast one season type');
+            return;
+        }
+        if (!validateForm() && currentTab === 1 && parseInt(quantity, 10) <= 0) {
+            setFormError('Please provide quantity of clothes');
+            return;
+        }
+        if (!validateForm() && currentTab === 1 && !Object.values(condition).some(val => val)) {
+            setFormError('Please select condition of clothes');
+            return;
+        }
+        if (!validateForm() && currentTab === 2 && preferredDay === '') {
+            setFormError('Please select preferred day for pickup');
             return;
         }
         
@@ -58,7 +81,7 @@ const DonorForm = () => {
     }
 
     const handleSubmit = (e) => {
-if (!validateForm() && currentTab === 2) {
+        if (!validateForm() && currentTab === 2) {
             setFormError('Please select a preferred day option');
             return;
         }
@@ -159,16 +182,16 @@ if (!validateForm() && currentTab === 2) {
     const validateForm = () => {
         const { clothingItems, season, quantity, condition, preferredDay } = formData;
         if (currentTab === 0) {
+
             const childrenItem = clothingItems.find(item => item.type === 'childrenClothes');
             const otherItem = clothingItems.find(item => item.type === 'other');
 
-            return clothingItems.some(item => item.selected) &&
-                   Object.values(season).some(val => val) &&
-                   (!otherItem.selected || otherItem.description !== '') && 
+            return clothingItems.some(item => item.selected) && 
+                   (!otherItem.selected || otherItem.description !== '') &&
                    (!childrenItem.selected || Object.values(childrenItem.childrenAgeGroups).some(val => val));
         }
         if (currentTab === 1) {
-            return parseInt(quantity, 10) > 0 && Object.values(condition).some(val => val);
+            return Object.values(season).some(val => val) && parseInt(quantity, 10) > 0 && Object.values(condition).some(val => val);
         }
         if (currentTab === 2) {
             return preferredDay !== '';
@@ -176,18 +199,17 @@ if (!validateForm() && currentTab === 2) {
         return true;
     };
 
-
     const renderButton = () => {
         if (currentTab === 0) {
             return (
-                <div>
+                <div className='button-container'>
                     <button type='button' className="btn nextBtn" onClick={nextFormStep}>Next</button>
                 </div>
             );
         }
         if (currentTab === 1) {
             return (
-                <div>
+                <div className='button-container'>
                     <button type='button' className="btn prevBtn" onClick={prevFormStep}>Prev</button>
                     <button type='button' className="btn nextBtn" onClick={nextFormStep}>Next</button>
                 </div>
@@ -195,7 +217,7 @@ if (!validateForm() && currentTab === 2) {
         }
         if (currentTab === 2) {
             return (
-                <div>
+                <div className='button-container'>
                     <button type='button' className="btn prevBtn" onClick={prevFormStep}>Prev</button>
                     <button type='button' className="btn submitBtn" onClick={handleSubmit}>Submit</button>
                 </div>
@@ -204,144 +226,154 @@ if (!validateForm() && currentTab === 2) {
         return null;
     }
 
+ 
     return (
-        <div className='donation-form-container'>
-            <form className="donation-form">
 
-            <div className="step-count">{currentTab+1}</div>
-            {currentTab === 0 && (
-                    <div key="step1">
-                        <h2 className='step-number'>1</h2>
-                        {formData.clothingItems.map((item, index) => (
-                            <div className='donate-item-info' key={item.type}>
-                                <label htmlFor={item.type}>{item.type.replace(/([A-Z])/g, ' $1').trim()}</label>
-                                <input
-                                    type="checkbox"
-                                    className='custom-checkbox'
-                                    checked={item.selected}
-                                    onChange={handleCheckboxChange(index, 'clothingItems')}
-                                />
-                                {item.type === 'childrenClothes' && item.selected && (
-                                    <div className='children-age-groups'>
-                                        <h3>Select Age Groups</h3>
-                                        {Object.keys(item.childrenAgeGroups).map(ageGroup => (
-                                            <div className='donate-item-info' key={ageGroup}>
-                                                <label htmlFor={ageGroup}>{ageGroup}</label>
-                                                <input
-                                                    type="checkbox"
-                                                    className='custom-checkbox'
-                                                    checked={item.childrenAgeGroups[ageGroup]}
-                                                    onChange={handleAgeGroupChange(index, ageGroup)}
-                                                />
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-                                {item.type === 'other' && item.selected && (
-                                    <div className='donate-item-info'>
-                                        <label htmlFor='other'>Description:</label>
-                                        <textarea
-                                            name={`clothingItems.${index}.description`}
-                                            value={item.description}
-                                            placeholder="Please describe"
-                                            onChange={handleChange(`clothingItems.${index}.description`)}
-                                        />
-                                    </div>
-                                )}
+        <div className="main-content">
+            <div className="content-image">
+                <img src={form_clothes} alt="" className="form-img"/>
+            </div>
+            <div className='donation-form-container'>
+                <form className="donation-form">
+
+                {/* <div className="step-count">{currentTab+1}</div> */}
+                {currentTab === 0 && (
+                        <div key="step1">
+                            <h1>STEP 1</h1>
+                            <h2>Provide Clothes Type</h2>
+                            <div className="donate-items">
+                            {formData.clothingItems.map((item, index) => (
+                                <div
+                                className={`donate-item ${
+                                    index < 3 ? "row-1" : index === 3 ? "row-2" : "row-3"
+                                }`}
+                                key={index}
+                            >
+                                    
+                                    <label>
+                                        <input type="checkbox" checked={item.selected} onChange={handleCheckboxChange(index, 'clothingItems')}/><span>{item.type.replace(/([A-Z])/g, ' $1').trim()}</span>
+                                    </label>
+                                
+                                    {item.type === 'childrenClothes' && item.selected && (
+                                        <div className='children-age-groups'>
+                                            <h3>Select Age Groups</h3>
+                                            {Object.keys(item.childrenAgeGroups).map(ageGroup => (
+                                                <div className='age-group-item' key={ageGroup}>
+                                                    
+                                                    <label>
+                                                        <input type="checkbox" checked={item.childrenAgeGroups[ageGroup]} onChange={handleAgeGroupChange(index, ageGroup)}/><span>{ageGroup}</span>
+                                                    </label>
+                                                </div>
+                                            ))} 
+                                        </div>
+                                    )}
+                                    {item.type === 'other' && item.selected && (
+                                        <div className='other-description'>
+                                            <textarea rows={5} cols={97}
+                                                name={`clothingItems.${index}.description`}
+                                                value={item.description}
+                                                placeholder="Please describe"
+                                                onChange={handleChange(`clothingItems.${index}.description`)}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
                             </div>
-                        ))}
-                        {formError && <p className="error">{formError}</p>}
-                        <h2>Select season type</h2>
-                        {Object.keys(formData.season).map(season => (
-                            <div className='donate-item-info' key={season}>
-                                <label htmlFor={season}>{season.charAt(0).toUpperCase() + season.slice(1)}</label>
-                                <input
-                                    type="checkbox"
-                                    className='custom-checkbox'
-                                    name={`season.${season}`}
-                                    checked={formData.season[season]}
-                                    onChange={handleChange(`season.${season}`)}
-                                />
-                            </div>
-                        ))}
-                        {formError && <p className="error">{formError}</p>}
-                    </div>
-                )}
+                            {formError && <p className="error">{formError}</p>}
+
+                            
+                        </div>
+                    )}
 
                 {currentTab === 1 && 
                 <div key="step2">
-                    <h2>Step 2: Provide Quantity and Condition</h2>
-                    <label>
-                        Quantity:
-                        <input type="number" name="quantity" value={formData.quantity} min="0" onChange={handleChange('quantity')}/>
-                    </label>
-                    {formError && <p className="error">{formError}</p>} 
+                        <h1>STEP 2</h1>
 
-                    {Object.keys(formData.condition).map(condition => (
-                            <div className='donate-item-info' key={condition}>
-                                <label htmlFor={condition}>{condition.charAt(0).toUpperCase() + condition.slice(1)}</label>
-                                <input
-                                    type="checkbox"
-                                    className='custom-checkbox'
-                                    name={`condition.${condition}`}
-                                    checked={formData.condition[condition]}
-                                    onChange={handleChange(`condition.${condition}`)}
-                                />
+                        <h2>Select season type</h2>
+                            <div className="donate-items">
+                            {Object.keys(formData.season).map(season => (
+                                <div className='donate-item' key={season}>
+                                    <label>
+                                        <input type="checkbox" name={`season.${season}`} checked={formData.season[season]} onChange={handleChange(`season.${season}`)}/><span>{season.charAt(0).toUpperCase() + season.slice(1)}</span>
+                                    </label>
+                                </div>
+                            ))}
                             </div>
-                        ))}
-                      
-                    <textarea name="specialInstructions" value={formData.specialInstructions} placeholder="Special instructions if any" onChange={handleChange('specialInstructions')}/>
-                    {formError && <p className="error">{formError}</p>} 
-                </div>}
-                
-                
-            {currentTab === 2 && 
-               <div key="step3">
-               <h2>Step 3: Select Preferred Day</h2>
-               <div className='donate-item-info'>
-                   <label>
-                       <input
-                           type="radio"
-                           name="preferredDay"
-                           value="weekdays"
-                           checked={formData.preferredDay === 'weekdays'}
-                           onChange={handleChange('preferredDay')}
-                       />
-                       Weekdays<br></br>
-                       Timing: 10am to 4pm
-                   </label>
-               </div>
-               <div className='donate-item-info'>
-                   <label>
-                       <input
-                           type="radio"
-                           name="preferredDay"
-                           value="weekends"
-                           checked={formData.preferredDay === 'weekends'}
-                           onChange={handleChange('preferredDay')}
-                       />
-                       Weekends<br></br>
-                       Timing: 10am to 4pm
-                   </label>
-               </div>
-           </div>
-}
 
-            {currentTab === 3 && 
-                <div key="step4">
-                <h2>Thank you!</h2>
-                <h4>We appreciate your effort towards donating for the greater good!<br/>
-                The NGOs will contact you soon!
-                </h4>
+                        <h2>Provide Quantity</h2>
+                        <label>
+                            <input type="number" className="quantity" name="quantity" value={formData.quantity} min="0" onChange={handleChange('quantity')}/>
+                        </label>
+                        
+
+                        <h2>Condition of clothes</h2>
+                        <div className="donate-items">
+                        {Object.keys(formData.condition).map(condition => (
+                                <div className='donate-item' key={condition}>
+                                
+                                    <label>
+                                        <input type="checkbox" name={`condition.${condition}`} checked={formData.condition[condition]} onChange={handleChange(`condition.${condition}`)}/><span>{condition.charAt(0).toUpperCase() + condition.slice(1)}</span>
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
+                        {formError && <p className="error">{formError}</p>} 
+                        
+                       
+                </div>}
+                                
+                {currentTab === 2 && 
+                <div key="step3">
+                    <h1>STEP 3</h1>
+
+                <h2>Select Preferred Day for pickup</h2>
+                <div className="donate-items">
+                <div className='donate-item preferred-days'>
+                    <label>
+                            <input type="radio" name="preferredDay" value="weekdays" checked={formData.preferredDay === 'weekdays'} onChange={handleChange('preferredDay')}/><span>Weekdays<br></br>
+                            Timing: 10am to 4pm</span>
+                        </label>
+                </div> 
+                <div className='donate-item preferred-days'>
+                    <label>
+                            <input type="radio" name="preferredDay" value="weekends" checked={formData.preferredDay === 'weekends'} onChange={handleChange('preferredDay')}/><span>Weekends<br></br>
+                            Timing: 12pm to 5pm</span>
+                        </label>
+                </div>
+                </div>
+                {formError && <p className="error">{formError}</p>} 
+
+                <h2>Additional Instructions (if any)</h2>
+                <div className="special-inst">
+                    <textarea rows={8} cols={97} name="specialInstructions" value={formData.specialInstructions} placeholder="Additional instructions if any" onChange={handleChange('specialInstructions')}/>
+                
+                </div>
+                
+                
             </div>}
 
-            <div className="button-container">
-                    {renderButton()}
-            </div>
+                {currentTab === 3 && 
+                    <div key="step4">
+                    <h2>Thank you!</h2>
+                    <h4>We appreciate your effort towards donating for the greater good!<br/>
+                    The NGOs will contact you soon!
+                    </h4>
+                </div>}
 
-            </form>
+                <div className="button-container">
+                        {renderButton()}
+                </div>
+
+                </form>
+            </div>
         </div>
+        
     );
+
+   
 }
+
+
 
 export default DonorForm;
