@@ -16,12 +16,36 @@ const Navbar = () => {
         setActive('navBar')
     }
 
-    return (
-        <section className="navBarSection">
-            <header className="header-navbar flex">
-                <div className="logoDiv">
-                        <BiSolidDonateHeart className="icon" />
-                        <h1>Gener<span>us</span></h1>
+  return (
+    <section className="navBarSection">
+        <header className="header flex">
+            <div className="logoDiv">
+                <a href="#" className="logo flex">
+                    <h1><BiSolidDonateHeart className="icon"/>Donate.</h1>
+                </a>
+            </div>
+
+            <div className={active}>
+                <ul className="navLists flex">
+                    <li className="navItem">
+                        <Link to="/" className='navLink'>Home</Link>
+                        {/* <a href="#" className="navLink">Home</a> */}
+                    </li>
+                    <li className="navItem">
+                        <a href="#" className="navLink">About Us</a>
+                    </li>
+                    <li className="navItem">
+                        <a href="#" className="navLink">NGOs</a>
+                    </li>
+
+                    <button className="btn">
+                        <Link to="/userSignup">Login/Register</Link>
+                    </button>
+                </ul>
+
+                <div onClick={removeNav} className="closeNavBar">
+                <IoIosCloseCircleOutline className='icon'/>
+
                 </div>
 
                 <div className={active}>

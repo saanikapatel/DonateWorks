@@ -51,7 +51,7 @@ const UserSignup = () => {
       .post("http://localhost:4000/auth/userSignup", data)
       .then((response) => {
         if (response.data.status) {
-          navigate("/userLogin");
+          navigate("/");
         }
       })
       .catch((err) => {
