@@ -1,28 +1,27 @@
 .main{
-    width: 100%;
+    width: 95%;
     position: relative;
-    background-color: #FAF6F1;
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem 0;
-    z-index: 10;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 1.5rem 0;
 
     .steps-container{
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-color: #eee6da;
-        width: 95%;
-        border-radius: 10px;
-        padding: 2rem;
+        background-color: white;
+        // border: 2px solid #F08080;
+        width: 100%;
 
         .secTitle{
             .title{
                 position: relative;
                 width: max-content;
-                // margin: 1rem 0;
                 z-index: 2;
                 font-size: 2.3rem;  
                 color: #4B4643;

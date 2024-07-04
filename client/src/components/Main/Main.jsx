@@ -3,9 +3,6 @@ import './main.css'
 import { BsListCheck } from "react-icons/bs";
 import { RiUser3Fill } from "react-icons/ri";
 import { FaHandsHelping } from "react-icons/fa";
-import img1 from '../../assets/steps_img1.png'
-import img2 from '../../assets/steps_img2.jpeg'
-import img3 from '../../assets/steps_img3.jpeg'
 
 const Data = [
   {
