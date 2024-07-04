@@ -43,6 +43,10 @@ const DonorForm = () => {
         const { clothingItems, season, quantity, condition, preferredDay } = formData;
         const childrenItem = clothingItems.find(item => item.type === 'childrenClothes');
         const otherItem = clothingItems.find(item => item.type === 'other');
+        if (!validateForm() && currentTab === 0) {
+            setFormError('Please select atleast one option.');
+            return;
+        }
         if (!validateForm() && currentTab === 0 && (otherItem.selected && otherItem.description === '')) {
             setFormError('Please provide details.');
             return;
@@ -198,14 +202,14 @@ const DonorForm = () => {
     const renderButton = () => {
         if (currentTab === 0) {
             return (
-                <div>
+                <div className='button-container'>
                     <button type='button' className="btn nextBtn" onClick={nextFormStep}>Next</button>
                 </div>
             );
         }
         if (currentTab === 1) {
             return (
-                <div>
+                <div className='button-container'>
                     <button type='button' className="btn prevBtn" onClick={prevFormStep}>Prev</button>
                     <button type='button' className="btn nextBtn" onClick={nextFormStep}>Next</button>
                 </div>
@@ -213,7 +217,7 @@ const DonorForm = () => {
         }
         if (currentTab === 2) {
             return (
-                <div>
+                <div className='button-container'>
                     <button type='button' className="btn prevBtn" onClick={prevFormStep}>Prev</button>
                     <button type='button' className="btn submitBtn" onClick={handleSubmit}>Submit</button>
                 </div>
@@ -237,7 +241,6 @@ const DonorForm = () => {
                         <div key="step1">
                             <h1>STEP 1</h1>
                             <h2>Provide Clothes Type</h2>
-                            {/* <h2>Clothes type</h2> */}
                             <div className="donate-items">
                             {formData.clothingItems.map((item, index) => (
                                 <div
@@ -253,7 +256,7 @@ const DonorForm = () => {
                                 
                                     {item.type === 'childrenClothes' && item.selected && (
                                         <div className='children-age-groups'>
-                                            <h2>Select Age Groups</h2>
+                                            <h3>Select Age Groups</h3>
                                             {Object.keys(item.childrenAgeGroups).map(ageGroup => (
                                                 <div className='age-group-item' key={ageGroup}>
                                                     
@@ -266,8 +269,7 @@ const DonorForm = () => {
                                     )}
                                     {item.type === 'other' && item.selected && (
                                         <div className='other-description'>
-                                            {/* <label htmlFor='other'>Description:</label> */}
-                                            <textarea
+                                            <textarea rows={5} cols={97}
                                                 name={`clothingItems.${index}.description`}
                                                 value={item.description}
                                                 placeholder="Please describe"
@@ -301,8 +303,7 @@ const DonorForm = () => {
 
                         <h2>Provide Quantity</h2>
                         <label>
-                            Quantity:
-                            <input type="number" name="quantity" value={formData.quantity} min="0" onChange={handleChange('quantity')}/>
+                            <input type="number" className="quantity" name="quantity" value={formData.quantity} min="0" onChange={handleChange('quantity')}/>
                         </label>
                         
 
@@ -328,13 +329,13 @@ const DonorForm = () => {
 
                 <h2>Select Preferred Day for pickup</h2>
                 <div className="donate-items">
-                <div className='donate-item'>
+                <div className='donate-item preferred-days'>
                     <label>
                             <input type="radio" name="preferredDay" value="weekdays" checked={formData.preferredDay === 'weekdays'} onChange={handleChange('preferredDay')}/><span>Weekdays<br></br>
                             Timing: 10am to 4pm</span>
                         </label>
                 </div> 
-                <div className='donate-item'>
+                <div className='donate-item preferred-days'>
                     <label>
                             <input type="radio" name="preferredDay" value="weekends" checked={formData.preferredDay === 'weekends'} onChange={handleChange('preferredDay')}/><span>Weekends<br></br>
                             Timing: 12pm to 5pm</span>
@@ -343,7 +344,11 @@ const DonorForm = () => {
                 </div>
                 {formError && <p className="error">{formError}</p>} 
 
-                <textarea name="specialInstructions" value={formData.specialInstructions} placeholder="Special instructions if any" onChange={handleChange('specialInstructions')}/>
+                <h2>Additional Instructions (if any)</h2>
+                <div className="special-inst">
+                    <textarea rows={8} cols={97} name="specialInstructions" value={formData.specialInstructions} placeholder="Additional instructions if any" onChange={handleChange('specialInstructions')}/>
+                
+                </div>
                 
                 
             </div>}

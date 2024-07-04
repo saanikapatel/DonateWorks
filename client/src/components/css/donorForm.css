@@ -56,6 +56,13 @@
   margin: 0rem 0.6rem;
 }
 
+.donation-form h3{
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #56524E;
+  margin: 0rem 0.7rem;
+}
+
   
 .donate-items{
   display: flex;
@@ -73,6 +80,7 @@
   border-radius: 4px;
   text-align: center;
   border: 1px solid #56524E;
+  
 }
 
 .donate-item span{
@@ -81,6 +89,7 @@
   display: block;
   border-radius: 5px;
   cursor: pointer;
+  width: 12rem;
 }
 
 .donate-item label input{
@@ -90,41 +99,80 @@
 .donate-item input:checked + span{background-color: #F08080; }
 
 .donate-item {
-  /* flex: 1 1 100%; */
   margin: 5px 0;
 }
 
 .row-1 {
-  flex: 1 1 calc(33.33% - 10px); /* Adjust to fit three items per row */
+  flex: 1 1 calc(33.33% - 10px); 
 }
 
 .row-2,
 .row-3 {
-  flex: 1 1 100%; /* Full width */
+  flex: 1 1 100%; 
 }
 
 .children-age-groups {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-  margin-left: 10px; /* Add some space between the checkbox and age groups */
+  margin-left: 10px; 
 }
 .age-group-item {
-  margin-right: 10px; /* Add some space between age group items */
+  margin-right: 0.2rem; 
+}
+
+.age-group-item span{
+  text-align: center;
+  padding: 0.2rem;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 4.5rem;
+}
+
+.preferred-days span{
+  text-align: center;
+  padding: 0.2rem;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 18rem;
 }
 
 .other-description {
   display: flex;
   align-items: center;
-  margin-left: 10px; /* Add some space between the checkbox and the textarea */
+  margin: 0rem 0.6rem;
 }
 
-.other-description textarea {
-  margin-left: 10px; /* Add some space between the label and the textarea */
+.special-inst{
+  margin: 0rem 0.6rem;
 }
 
 .error{
   color: red;
   font-size: 0.7rem;
+}
+
+.quantity{
+  margin: 0rem 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.button-container .btn{
+  width: 8rem;
+  border-radius: 4px;
+  margin-left: 0.6rem;
+  margin-right: 2rem;
+}
+
+.button-container {
+  width: 100%; /* Ensure the container takes the full width of the form */
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  position: absolute;
+  bottom: 1rem; /* Adjust as needed to move buttons up or down */
+  right: 0.3rem; /* Adjust as needed to move buttons left or right */
 }
 
 @media (max-width: 768px) {
@@ -160,9 +208,6 @@
   }
 
   .donate-item {
-    flex: 1 1 100%; /* Full width */
+    flex: 1 1 100%;
   }
 }
-
-
-
