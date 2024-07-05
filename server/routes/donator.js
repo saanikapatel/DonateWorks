@@ -23,16 +23,25 @@ router.post("/userSignup", async (req, res) => {
   });
 
   await newUser.save();
-  return res.json({ status: true, message: "Record registered!" });
-});
 
+  const token = jwt.sign({ username: newUser.username }, process.env.KEY, {
+    expiresIn: "1h",
+  });
+
+  // console.log("Generated Token:", token); // Debug log
+
+  res.cookie("token", token, { httpOnly: true, maxAge: 3600000 });
+  return res.json({ status: true, message: "Record registered!", token });
+});
 
 router.post("/userLogin", async (req, res) => {
   const { email, password } = req.body;
   const user = await Donator.findOne({ email });
 
   if (!user) {
-    return res.json({ message: "User is not registered." });
+    console.log(user);
+    return res.json({ status: false, message: "User is not registered." });
+    // return res.json({  message: "User is not registered." });
   }
 
   const validPassword = await bcrypt.compare(password, user.password);
@@ -45,10 +54,8 @@ router.post("/userLogin", async (req, res) => {
   });
 
   res.cookie("token", token, { httpOnly: true, maxAge: 3600000 });
-  return res.json({ status: true, message: "Login successful!" });
+  return res.json({ status: true, message: "Login successful!", token });
 });
-
-
 
 const verifyUser = async (req, res, next) => {
   try {
@@ -65,16 +72,12 @@ const verifyUser = async (req, res, next) => {
   }
 };
 
-
-
 router.get("/verify", verifyUser, (req, res) => {
   return res.json({ status: true, message: "Authorized" });
 });
 
-
-
 router.get("/logout", (req, res) => {
-  res.clearCookie('token');
+  res.clearCookie("token");
   res.json({ status: true, message: "Logged out" });
 });
 
