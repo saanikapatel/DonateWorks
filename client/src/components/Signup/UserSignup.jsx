@@ -6,8 +6,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 const UserSignup = () => {
   const [formStep, setFormStep] = useState(0);
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm({ mode: "all" });
- 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({ mode: "all" });
+
   const title = ["Sign Up", "Additional Info"];
 
   const completeFormStep = () => {
@@ -27,7 +31,12 @@ const UserSignup = () => {
       );
     } else {
       return (
-        <button disabled={!isValid} type="button" onClick={completeFormStep} className="userFormButton">
+        <button
+          disabled={!isValid}
+          type="button"
+          onClick={completeFormStep}
+          className="userFormButton"
+        >
           Next
         </button>
       );
@@ -37,7 +46,11 @@ const UserSignup = () => {
   const renderBackButton = () => {
     if (formStep === 1) {
       return (
-        <button type="button" onClick={goToPreviousStep} className="userFormButton">
+        <button
+          type="button"
+          onClick={goToPreviousStep}
+          className="userFormButton"
+        >
           Prev
         </button>
       );
@@ -48,10 +61,12 @@ const UserSignup = () => {
 
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:4000/auth/userSignup", data)
+      .post("http://localhost:4000/auth/userSignup", data, {
+        withCredentials: true, // Important: Include credentials with the request
+      })
       .then((response) => {
         if (response.data.status) {
-          navigate("/userLogin");
+          navigate("/");
         }
       })
       .catch((err) => {
