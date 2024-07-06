@@ -30,6 +30,9 @@
   color: lightcoral;
   transform: translateY(5px);
 }
+.header .logo span {
+  color: lightcoral;
+}
 @media screen and (max-width: 768px) {
   .header .navBar {
     position: absolute;
