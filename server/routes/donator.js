@@ -10,7 +10,7 @@ router.post("/userSignup", async (req, res) => {
   const user = await Donator.findOne({ email });
 
   if (user) {
-    return res.json({ message: "User already exists" });
+    return res.json({ status: false, message: "User already exists" });
   }
 
   const hashPassword = await bcrypt.hash(password, 10);
@@ -24,7 +24,7 @@ router.post("/userSignup", async (req, res) => {
 
   await newUser.save();
 
-  const token = jwt.sign({ username: newUser.username }, process.env.KEY, {
+  const token = jwt.sign({ email: newUser.email }, process.env.KEY, {
     expiresIn: "1h",
   });
 
@@ -34,28 +34,28 @@ router.post("/userSignup", async (req, res) => {
   return res.json({ status: true, message: "Record registered!", token });
 });
 
+
 router.post("/userLogin", async (req, res) => {
   const { email, password } = req.body;
   const user = await Donator.findOne({ email });
 
   if (!user) {
-    console.log(user);
     return res.json({ status: false, message: "User is not registered." });
-    // return res.json({  message: "User is not registered." });
   }
 
   const validPassword = await bcrypt.compare(password, user.password);
   if (!validPassword) {
-    return res.json({ message: "Incorrect password" });
+    return res.json({ status: false, message: "Incorrect password" });
   }
 
-  const token = jwt.sign({ username: user.username }, process.env.KEY, {
+  const token = jwt.sign({ email: user.email }, process.env.KEY, {
     expiresIn: "1h",
   });
 
   res.cookie("token", token, { httpOnly: true, maxAge: 3600000 });
   return res.json({ status: true, message: "Login successful!", token });
 });
+
 
 const verifyUser = async (req, res, next) => {
   try {
