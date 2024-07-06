@@ -9,6 +9,7 @@ const ChildrenAgeGroupsSchema = new mongoose.Schema({
 });
 
 const DonationSchema = new mongoose.Schema({
+    email: { type: String, required: true },
     clothingItems: [
         {
             type: { type: String, required: true },

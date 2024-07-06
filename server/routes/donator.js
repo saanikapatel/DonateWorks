@@ -24,13 +24,13 @@ router.post("/userSignup", async (req, res) => {
 
   await newUser.save();
 
-  const token = jwt.sign({ username: newUser.username }, process.env.KEY, {
+  const token = jwt.sign({ email: newUser.email }, process.env.KEY, {
     expiresIn: "1h",
   });
 
   // console.log("Generated Token:", token); // Debug log
 
-  res.cookie("token", token, { httpOnly: true, maxAge: 3600000 });
+  res.cookie("token", token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', maxAge: 3600000 });
   return res.json({ status: true, message: "Record registered!", token });
 });
 
@@ -49,7 +49,7 @@ router.post("/userLogin", async (req, res) => {
     return res.json({ message: "Incorrect password" });
   }
 
-  const token = jwt.sign({ username: user.username }, process.env.KEY, {
+  const token = jwt.sign({ email: user.email }, process.env.KEY, {
     expiresIn: "1h",
   });
 

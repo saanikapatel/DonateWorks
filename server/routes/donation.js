@@ -1,18 +1,40 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
 import {Donation} from '../models/Donation.js';
 import jwt from 'jsonwebtoken';
-
+import cookieParser from 'cookie-parser';
+ 
 const router = express.Router();
 
+const app = express();
+
+// Middleware to parse cookies
+app.use(cookieParser());
+ 
 router.post('/donate', async (req, res) => {
     try {
-        const formData = req.body; // Assuming formData is sent from the client
+         
+        const { clothingItems, season, quantity, condition, specialInstructions, preferredDay } = req.body;
+        const token = req.cookies.token;
 
-        // Create a new Donation document based on the schema
-        const newDonation = new Donation(formData);
+        if (!token) {
+            // console.log("test");
+            return res.status(401).json({ message: 'Access denied. No token provided.' });
+        }
+        // console.log(formData);
+        const decoded = jwt.verify(token, process.env.KEY);
+        const email = decoded.email;
+ 
+        const newDonation = new Donation({
+            email,
+            clothingItems,
+            season,
+            quantity,
+            condition,
+            specialInstructions,
+            preferredDay
+          });
 
-        // Save the new donation to MongoDB
+        //   console.log(newDonation);
         await newDonation.save();
 
         res.status(201).json({ message: 'Donation saved successfully', donation: newDonation });

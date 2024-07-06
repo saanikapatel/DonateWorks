@@ -2,49 +2,39 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    // background-color: #F0E6D6; 
+    background-color: #F0E6D6; 
 }
 
-.header-navbar{
+.header{
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: white; 
+    background: #F0E6D6;
     width: 95%;
-    padding: 0.3rem 1rem;
+    padding: 0.5rem;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(2, 15, 29, 0.242);
     border-radius: 50px;
     margin: 1.5rem 0;
 
-    .logoDiv{
+    .logo{
         color: black;
         font-weight: 600;
-        display: flex;
         cursor: pointer;
         align-items: center;
         justify-content: center;
- 
-        h1{
-            font-size: 1.5rem;
-            margin-bottom: 0;
-            font-weight: 600;
-
-            span{
-                color: #F08080;
-            }
-        }
 
         .icon{
-            margin-bottom: 0.5rem;
             font-size: 25px;
-            color: #90AFC5;
-            color: #F08080;
+            color: lightcoral;
             transform: translateY(5px);
-        }
 
-        
+            
+        }
+        span{
+            color: lightcoral;
+        }
     }
 
     @media screen and (max-width: 768px){
@@ -56,7 +46,7 @@
             border-radius: 1rem;
             top: -500rem;
             left: 50%;
-            padding: 0rem;
+            padding: 1rem;
             transform: translate(-50%);
             z-index: 2000;
             box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
@@ -67,7 +57,6 @@
                 justify-content: center;
                 width: 100%;
                 margin: auto;
-                margin-bottom: 0rem;
                 padding: 0.5rem 0;
 
                 .navItem{
@@ -128,7 +117,7 @@
         display: none;
     }
 
-    .header-navbar{
+    .header{
         padding: .5rem 1rem;
 
         
@@ -137,13 +126,6 @@
             align-items: center;
             justify-content: center;
             flex-direction: row;
-            margin-bottom: 0;
-
-            .btn{
-                &:hover{
-                    background-color: lightcoral;
-                }
-            }
 
             .navItem{
                 .navLink{
