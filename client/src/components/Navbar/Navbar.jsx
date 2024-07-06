@@ -24,7 +24,7 @@ const Navbar = () => {
         <header className="header flex">
             <div className="logoDiv">
                 <a href="#" className="logo flex">
-                    <h1><BiSolidDonateHeart className="icon"/>Donate.</h1>
+                    <h1><BiSolidDonateHeart className="icon"/>Gener<span>us</span></h1>
                 </a>
             </div>
 

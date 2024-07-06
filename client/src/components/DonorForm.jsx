@@ -79,7 +79,7 @@ const DonorForm = () => {
     const prevFormStep = () => {
         setCurrentTab(prevTab => prevTab - 1);
     }
-
+ 
     const handleSubmit = (e) => {
         if (!validateForm() && currentTab === 2) {
             setFormError('Please select a preferred day option');
@@ -109,7 +109,7 @@ const DonorForm = () => {
             preferredDay: formData.preferredDay
         };
     
-        Axios.post("http://localhost:4000/donate", dataToSend)
+        Axios.post("http://localhost:4000/donate", dataToSend, { withCredentials: true })
             .then(response => {
                 console.log(response);
                 // Handle success if needed
@@ -226,7 +226,6 @@ const DonorForm = () => {
         return null;
     }
 
- 
     return (
 
         <div className="main-content">
