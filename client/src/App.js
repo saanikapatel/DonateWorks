@@ -8,6 +8,7 @@ import Choose from "./components/Choose";
 import UserSignup from "./components/Signup/UserSignup";
 import UserLogin from "./components/Login/UserLogin";
 import NgoLogin from "./components/Login/NgoLogin";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/userSignup" element={<UserSignup />}></Route>
           <Route path="/userLogin" element={<UserLogin />}></Route>
           <Route path="/ngoLogin" element={<NgoLogin />}></Route>
+          <Route path="/dashboard" element={<Dashboard/>}></Route>
           {/* <Route path="/admin" element={< />}></Route> */}
         </Routes>
         <Footer />

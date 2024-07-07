@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../css/UserForm.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from '../../context/AuthContext';
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setToken } = useContext(AuthContext);
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-  axios.defaults.withCredentials=true;
+  axios.defaults.withCredentials = true;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +22,7 @@ const UserLogin = () => {
       })
       .then((response) => {
         if (response.data.status){
+          setToken(response.data.token);
           navigate('/');
         }
       })
@@ -55,4 +58,3 @@ const UserLogin = () => {
 };
 
 export default UserLogin;
-
