@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../css/UserForm.css";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from '../../context/AuthContext';
 
 const UserSignup = () => {
   const [formStep, setFormStep] = useState(0);
@@ -11,6 +12,7 @@ const UserSignup = () => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
+  const { setToken } = useContext(AuthContext);
 
   const title = ["Sign Up", "Additional Info"];
 
@@ -62,10 +64,11 @@ const UserSignup = () => {
   const onSubmit = (data) => {
     axios
       .post("http://localhost:4000/auth/userSignup", data, {
-        withCredentials: true, // Important: Include credentials with the request
+        withCredentials: true,
       })
       .then((response) => {
         if (response.data.status) {
+          setToken(response.data.token);
           navigate("/");
         }
       })
