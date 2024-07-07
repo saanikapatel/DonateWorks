@@ -5,7 +5,8 @@ const DonatorSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   address: { type: String, required: true }, 
-  contactNumber: { type: String, required: true }
+  contactNumber: { type: String, required: true },
+  userType: { type: String, required: true, enum: ['user', 'ngo'] }
 });
 
 const DonatorModel = mongoose.model("Donator", DonatorSchema);

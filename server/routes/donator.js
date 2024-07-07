@@ -30,7 +30,7 @@ router.post("/userSignup", async (req, res) => {
 
   // console.log("Generated Token:", token); // Debug log
 
-  res.cookie("token", token, { httpOnly: true, maxAge: 3600000 });
+  res.cookie("token", token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', maxAge: 3600000 });
   return res.json({ status: true, message: "Record registered!", token });
 });
 

@@ -21,15 +21,12 @@ const Navbar = () => {
 
   return (
     <section className="navBarSection">
-      <header className="header flex">
-        <div className="logoDiv">
-          <a href="#" className="logo flex">
-            <h1>
-              <BiSolidDonateHeart className="icon" />
-              Gener<span>us</span>
-            </h1>
-          </a>
-        </div>
+        <header className="header flex">
+            <div className="logoDiv">
+                <a href="#" className="logo flex">
+                    <h1><BiSolidDonateHeart className="icon"/>Donate.</h1>
+                </a>
+            </div>
 
         <div className={active}>
           <ul className="navLists flex">
