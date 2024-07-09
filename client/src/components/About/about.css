@@ -1,0 +1,34 @@
+.about-container{
+    border: 1px solid black;
+    margin: 10rem;
+    padding: 3rem;
+    border-radius: 20px;
+    background-color: #F0E6D6;
+    text-align: center;
+}
+
+.about-container h4{
+    font-size: 1.5rem;
+}
+
+.about-container span{
+    color: #F08080;
+}
+
+
+.about-container p{
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 768px){
+    .about-container{
+        margin: 8rem 3rem;
+        padding: 1.5rem;
+    }
+
+    .about-container h4{
+        font-size: 1.3rem;
+    }
+}

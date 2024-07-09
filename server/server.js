@@ -21,7 +21,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-
+ 
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
@@ -54,7 +54,7 @@ app.use("/", DonationRouter);
 //     description: "for orphans"
 //   };
 
-//   try {
+//   try { 
 //     const hashPassword = await bcrypt.hash(ngoDetails.password, 10);
 
 //     // Insert the NGO details into the database

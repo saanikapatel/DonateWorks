@@ -1,30 +1,61 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import { BiSolidDonateHeart } from "react-icons/bi";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { CgProfile } from "react-icons/cg";
+import { FaUser } from "react-icons/fa";
 import { TbGridDots } from "react-icons/tb";
 import { AuthContext } from "../../context/AuthContext";
-
+import {jwtDecode} from 'jwt-decode';
+ 
 const Navbar = () => {
-  const [active, setActive] = useState("navBar");
-  const { token } = useContext(AuthContext);
 
-  const showNav = () => {
-    setActive("navBar activeNavbar");
+const [active, setActive] = useState("navBar");
+const { token } = useContext(AuthContext);
+const navigate = useNavigate();
+
+const showNav = () => {
+  setActive("navBar activeNavbar");
+};
+
+const removeNav = () => {
+  setActive("navBar");
+};
+
+
+  const handleDashboardClick = () => {
+
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        const role = decoded.role;
+        console.log('Token:', token);
+        console.log('Role:', role);
+
+        if (role === 'user') {
+          navigate('/userDashboard');
+        } else if (role === 'ngo') {
+          navigate('/ngoDashboard');
+        }
+      } catch (error) {
+        console.error('Error decoding token:', error);
+      }
+    }
   };
 
-  const removeNav = () => {
-    setActive("navBar");
-  };
+    const [isOpen, setIsOpen] = useState(false);
+  
+    const toggleDropdown = () => {
+      setIsOpen(!isOpen);
+    };
+  
 
   return (
     <section className="navBarSection">
         <header className="header flex">
             <div className="logoDiv">
                 <a href="#" className="logo flex">
-                    <h1><BiSolidDonateHeart className="icon"/>Donate.</h1>
+                    <h1><BiSolidDonateHeart className="icon"/>Gener<span>us</span></h1>
                 </a>
             </div>
 
@@ -36,9 +67,9 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="navItem">
-              <a href="#" className="navLink">
-                About Us
-              </a>
+            <Link to="/about" className="navLink">
+                About
+              </Link>
             </li>
             <li className="navItem">
               <a href="#" className="navLink">
@@ -47,15 +78,24 @@ const Navbar = () => {
             </li>
 
             {token ? (
-              <button className="btn-profile-icon">
-                <Link to="/dashboard">
-                  <CgProfile />
-                </Link>
+              <button className="btn-profile-icon" onClick={handleDashboardClick}>
+                <FaUser />
               </button>
             ) : (
-              <button className="btn">
-                <Link to="/userSignup">Login/Register</Link>
-              </button>
+              // <button className="btn">
+              //   <Link to="/userSignup">Login/Register</Link>
+              // </button>
+              <div className="dropdown">
+      <button onClick={toggleDropdown} className="btn">
+        Login/Register
+      </button>
+      {isOpen && (
+        <div className="dropdown-content">
+          <Link to="/userSignup" onClick={() => setIsOpen(false)}>Donator</Link>
+          <Link to="/ngoLogin" onClick={() => setIsOpen(false)}>NGO</Link>
+        </div>
+      )}
+    </div>
             )}
           </ul>
 
