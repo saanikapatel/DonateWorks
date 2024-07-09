@@ -24,7 +24,7 @@ router.post("/userSignup", async (req, res) => {
 
   await newUser.save();
 
-  const token = jwt.sign({ email: newUser.email }, process.env.KEY, {
+  const token = jwt.sign({ email: newUser.email, role: "user" }, process.env.KEY, {
     expiresIn: "1h",
   });
 
@@ -48,7 +48,7 @@ router.post("/userLogin", async (req, res) => {
     return res.json({ status: false, message: "Incorrect password" });
   }
 
-  const token = jwt.sign({ email: user.email }, process.env.KEY, {
+  const token = jwt.sign({ email: user.email, role: "user" }, process.env.KEY, {
     expiresIn: "1h",
   });
 

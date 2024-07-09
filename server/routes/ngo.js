@@ -21,7 +21,7 @@ router.post("/ngoLogin", async (req, res) => {
       return res.json({ message: "Incorrect password" });
     }
   
-    const token = jwt.sign({ username: user.username }, process.env.KEY, {
+    const token = jwt.sign({ username: user.username, role: "ngo" }, process.env.KEY, {
       expiresIn: "1h",
     });
   
