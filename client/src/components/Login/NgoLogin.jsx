@@ -52,7 +52,7 @@ const NgoLogin = () => {
       </form>
     </div>
   );
-};
+}; 
 
 export default NgoLogin;
 

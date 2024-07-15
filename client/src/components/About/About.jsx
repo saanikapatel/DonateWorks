@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './about.css'
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className='about-container'>
       <h4>Welcome to Gener<span>us</span>, where generosity meets impact.</h4> 

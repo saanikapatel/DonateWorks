@@ -228,6 +228,11 @@ const DonorForm = () => {
 
     return (
 
+        <>
+        <div className="form-tagline">
+        <h2>Please provide details regarding your donation</h2>
+        </div>
+        
         <div className="main-content">
             <div className="content-image">
                 <img src={form_clothes} alt="" className="form-img"/>
@@ -367,6 +372,9 @@ const DonorForm = () => {
                 </form>
             </div>
         </div>
+        
+        </>
+
         
     );
 

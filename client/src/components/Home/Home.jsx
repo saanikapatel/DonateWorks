@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import './home.css'
 import video from '../../assets/cover_video.mp4'
@@ -6,6 +6,9 @@ import Main from '../Main/Main'
 import { AuthContext } from "../../context/AuthContext";
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { token } = useContext(AuthContext);
   const navigate = useNavigate();
 

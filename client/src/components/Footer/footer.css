@@ -1,39 +1,52 @@
 .footer {
-  width: 100%;
+  width: 95%;
   position: relative;
-  padding: 2rem 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin: auto;
-}
-.footer .videoDiv {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-}
-.footer .videoDiv video {
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.footer .secContent {
-  width: 100%;
-  height: -moz-max-content;
-  height: max-content;
-  padding: 2rem initial;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin: auto;
-  row-gap: 2rem;
+  justify-content: space-between;
+  margin: 2rem auto;
+  border-radius: 10px;
   z-index: 100;
+  background-color: #cbb590;
+  padding: 2rem 1.6rem;
+  flex-direction: column;
+}
+
+.footer .secContent {
+  flex-direction: column;
+}
+
+.footer-logo{
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+.footer-logo .icon{
+  font-size: 25px;
+  color: lightcoral;
+  transform: translateY(5px);
+}
+.footer-logo span {
+  color: lightcoral;
+}
+
+.footer-logo h4{
+  font-weight: 500;
+  margin-bottom: 1rem;
+  /* margin-left: 1.8rem; */
 }
 .footer .secContent .contactDiv {
-  justify-content: space-between;
+  width: 100%;
+  display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  /* margin: 0 auto; */
+  row-gap: 2rem;
+  /* justify-content: space-between; */
+  gap: 0rem;
 }
 .footer .secContent .contactDiv .text {
   color: white;
@@ -75,21 +88,50 @@
 }
 .footer .secContent .contactDiv .inputDiv .btn .icon {
   font-size: 18px;
+} 
+
+.copyright{
+  z-index: 100;
 }
 
 @media screen and (min-width: 500px) {
-  .footer .secContent .contactDiv {
+
+  .footer{
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: start;
+    padding: 2rem 3.5rem;
+  }
+
+  .footer .secContent{
+    flex: 2;
+  }
+  .footer .useful-links{
+    flex: 1;
+  }
+  .footer .secContent .contactDiv {
+    justify-content: center;
+    align-items: start;
+    /* justify-content: space-evenly; */
+  }
+
+  .footer .secContent .contactDiv .text {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
   }
   .footer .secContent .contactDiv .inputDiv {
-    width: -moz-max-content;
-    width: max-content;
+    /* width: -moz-max-content; */
+    /* width: max-content; */
     flex-direction: row;
     justify-content: flex-start;
   }
   .footer .secContent .contactDiv .inputDiv input {
-    width: 60%;
+    width: 50%;
+    margin-top: 1.4rem;
   }
   .footer .secContent .contactDiv .inputDiv .btn {
     width: -moz-max-content;
