@@ -24,7 +24,7 @@ const Data = [
     description: "We'll connect you to the NGO that accepts your donations"
   }
 ]
-
+ 
 const Main = () => {
   return (
     <>

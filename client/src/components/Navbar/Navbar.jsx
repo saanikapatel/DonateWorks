@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import { BiSolidDonateHeart } from "react-icons/bi";
@@ -6,22 +6,23 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { TbGridDots } from "react-icons/tb";
 import { AuthContext } from "../../context/AuthContext";
-import {jwtDecode} from 'jwt-decode';
- 
+import { jwtDecode } from 'jwt-decode';
+
 const Navbar = () => {
 
-const [active, setActive] = useState("navBar");
-const { token } = useContext(AuthContext);
-const navigate = useNavigate();
+  const [active, setActive] = useState("navBar");
+  const { token } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const dropdownRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-const showNav = () => {
-  setActive("navBar activeNavbar");
-};
+  const showNav = () => {
+    setActive("navBar activeNavbar");
+  };
 
-const removeNav = () => {
-  setActive("navBar");
-};
-
+  const removeNav = () => {
+    setActive("navBar");
+  };
 
   const handleDashboardClick = () => {
 
@@ -43,21 +44,37 @@ const removeNav = () => {
     }
   };
 
-    const [isOpen, setIsOpen] = useState(false);
-  
-    const toggleDropdown = () => {
-      setIsOpen(!isOpen);
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('click', handleClickOutside);
+    } else {
+      document.removeEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
     };
-  
+  }, [isOpen]);
+
 
   return (
     <section className="navBarSection">
-        <header className="header flex">
-            <div className="logoDiv">
-                <a href="#" className="logo flex">
-                    <h1><BiSolidDonateHeart className="icon"/>Gener<span>us</span></h1>
-                </a>
-            </div>
+      <header className="header flex">
+        <div className="logoDiv">
+          <a href="#" className="logo flex">
+            <h1><BiSolidDonateHeart className="icon" />Gener<span>us</span></h1>
+          </a>
+        </div>
 
         <div className={active}>
           <ul className="navLists flex">
@@ -67,7 +84,7 @@ const removeNav = () => {
               </Link>
             </li>
             <li className="navItem">
-            <Link to="/about" className="navLink">
+              <Link to="/about" className="navLink">
                 About
               </Link>
             </li>
@@ -82,20 +99,18 @@ const removeNav = () => {
                 <FaUser />
               </button>
             ) : (
-              // <button className="btn">
-              //   <Link to="/userSignup">Login/Register</Link>
-              // </button>
-              <div className="dropdown">
-      <button onClick={toggleDropdown} className="btn">
-        Login/Register
-      </button>
-      {isOpen && (
-        <div className="dropdown-content">
-          <Link to="/userSignup" onClick={() => setIsOpen(false)}>Donator</Link>
-          <Link to="/ngoLogin" onClick={() => setIsOpen(false)}>NGO</Link>
-        </div>
-      )}
-    </div>
+
+              <div className="dropdown" ref={dropdownRef}>
+                <button onClick={toggleDropdown} className="btn">
+                  Login/Register
+                </button>
+                {isOpen && (
+                  <div className="dropdown-content">
+                    <Link to="/userSignup" onClick={() => setIsOpen(false)} className="drop-options">Donator</Link>
+                    <Link to="/ngoLogin" onClick={() => setIsOpen(false)} className="drop-options">NGO</Link>
+                  </div>
+                )}
+              </div>
             )}
           </ul>
 

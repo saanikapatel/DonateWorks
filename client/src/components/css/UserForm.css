@@ -5,11 +5,10 @@
     height: 100vh;
   }
   .sign-up-form {
-    width: 300px;
+    width: 40rem;
     padding: 20px;
-    border: 1px solid red;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
   
   label {

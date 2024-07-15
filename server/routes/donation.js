@@ -44,4 +44,24 @@ router.post('/donate', async (req, res) => {
     }
 });
 
+router.get('/user-donations', async (req, res) => {
+    try {
+      const token = req.cookies.token;
+      if (!token) {
+        return res.status(401).json({ message: 'Access denied. No token provided.' });
+      }
+  
+      const decoded = jwt.verify(token, process.env.KEY);
+      const email = decoded.email;
+  
+      const donations = await Donation.find({ email });
+      console.log(donations);
+      res.json(donations);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error fetching donations' });
+    }
+  });
+
+  
 export {router as DonationRouter};
