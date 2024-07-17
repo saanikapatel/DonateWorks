@@ -9,7 +9,8 @@ const router = express.Router();
 
 router.post("/ngoLogin", async (req, res) => {
     const { email, password } = req.body;
-    const user = await NgoInfo.findOne({ email });
+    try {
+      const user = await NgoInfo.findOne({ email });
   
     if (!user) {
       return res.json({ message: "NGO is not registered." });
@@ -24,9 +25,16 @@ router.post("/ngoLogin", async (req, res) => {
     const token = jwt.sign({ username: user.username, role: "ngo" }, process.env.KEY, {
       expiresIn: "1h",
     });
-  
+
+
     res.cookie("token", token, { httpOnly: true, maxAge: 3600000 });
-    return res.json({ status: true, message: "Login successful!" });
+    res.json({status:true, message: "Login successful!",token});
+  
+    // return res.json({ status: true, message: "Login successful!" });
+    } catch (error) {
+      console.log(error);
+      res.json({status:false, message:"Error"});
+    }
   });
   
   

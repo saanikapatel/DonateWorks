@@ -1,15 +1,15 @@
-import React, {useContext, useState, useEffect} from 'react'
-import { Link, useNavigate } from "react-router-dom";
+import React, {useContext, useEffect} from 'react'
+import { useNavigate } from "react-router-dom";
 import './home.css'
 import video from '../../assets/cover_video.mp4'
 import Main from '../Main/Main'
-import { AuthContext } from "../../context/AuthContext";
+import { StoreContext } from '../../context/StoreContext';
 
 const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const { token } = useContext(AuthContext);
+  const {token}=useContext(StoreContext);
   const navigate = useNavigate();
 
   const handleJoinUs = () => {
