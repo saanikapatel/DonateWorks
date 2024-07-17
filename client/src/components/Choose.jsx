@@ -11,7 +11,7 @@ const Choose = () => {
             </div>
             <div className="choose-item">
                 <img src={choose_ngo} alt="" className="choose-item-img" />
-                <button className="btn"><Link to="/ngoLogin">Joins as an NGO</Link></button>
+                <button className="btn"><Link to="/ngoLogin">Join as an NGO</Link></button>
             </div>
         </div>
     );

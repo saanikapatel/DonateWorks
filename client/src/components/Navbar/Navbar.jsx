@@ -5,13 +5,13 @@ import { BiSolidDonateHeart } from "react-icons/bi";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { TbGridDots } from "react-icons/tb";
-import { AuthContext } from "../../context/AuthContext";
 import { jwtDecode } from 'jwt-decode';
+import { StoreContext } from "../../context/StoreContext";
 
 const Navbar = () => {
 
+  const {token}=useContext(StoreContext);
   const [active, setActive] = useState("navBar");
-  const { token } = useContext(AuthContext);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -71,7 +71,7 @@ const Navbar = () => {
     <section className="navBarSection">
       <header className="header flex">
         <div className="logoDiv">
-          <a href="#" className="logo flex">
+          <a href="/" className="logo flex">
             <h1><BiSolidDonateHeart className="icon" />Gener<span>us</span></h1>
           </a>
         </div>
@@ -106,7 +106,7 @@ const Navbar = () => {
                 </button>
                 {isOpen && (
                   <div className="dropdown-content">
-                    <Link to="/userSignup" onClick={() => setIsOpen(false)} className="drop-options">Donator</Link>
+                    <Link to="/userLogin" onClick={() => setIsOpen(false)} className="drop-options">Donator</Link>
                     <Link to="/ngoLogin" onClick={() => setIsOpen(false)} className="drop-options">NGO</Link>
                   </div>
                 )}

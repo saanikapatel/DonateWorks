@@ -7,55 +7,73 @@ const router = express.Router();
 
 router.post("/userSignup", async (req, res) => {
   const { username, email, password, address, contactNumber } = req.body;
-  const user = await Donator.findOne({ email });
+  try {
+    const exists = await Donator.findOne({ email });
 
-  if (user) {
-    return res.json({ status: false, message: "User already exists" });
+    if (exists) {
+      return res.json({ status: false, message: "User already exists" });
+    }
+
+    const hashPassword = await bcrypt.hash(password, 10);
+    const newUser = new Donator({
+      username,
+      email,
+      password: hashPassword,
+      address,
+      contactNumber,
+    });
+
+    await newUser.save();
+
+    const token = jwt.sign(
+      { email: newUser.email, role: "user" },
+      process.env.KEY,
+      {
+        expiresIn: "1h",
+      }
+    );
+    res.cookie("token", token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', maxAge: 3600000 });
+    res.json({ status: true,message: "Record registered!", token });
+
+    // res.cookie("token", token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', maxAge: 3600000 });
+    // return res.json({ status: true, message: "Record registered!", token });
+  } catch (error) {
+    console.log(error);
+    res.json({ status: false, message: "Error" });
   }
-
-  const hashPassword = await bcrypt.hash(password, 10);
-  const newUser = new Donator({
-    username,
-    email,
-    password: hashPassword,
-    address,
-    contactNumber,
-  });
-
-  await newUser.save();
-
-  const token = jwt.sign({ email: newUser.email, role: "user" }, process.env.KEY, {
-    expiresIn: "1h",
-  });
-
-  // console.log("Generated Token:", token); // Debug log
-
-  res.cookie("token", token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', maxAge: 3600000 });
-  return res.json({ status: true, message: "Record registered!", token });
 });
-
 
 router.post("/userLogin", async (req, res) => {
   const { email, password } = req.body;
-  const user = await Donator.findOne({ email });
+  try {
+    const user = await Donator.findOne({ email });
 
-  if (!user) {
-    return res.json({ status: false, message: "User is not registered." });
+    if (!user) {
+      return res.json({ status: false, message: "User is not registered." });
+    }
+
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      return res.json({ status: false, message: "Incorrect password" });
+    }
+
+    const token = jwt.sign(
+      { email: user.email, role: "user" },
+      process.env.KEY,
+      {
+        expiresIn: "1h",
+      }
+    );
+    res.cookie("token", token, { httpOnly: true, maxAge: 3600000 });
+    res.json({status:true, message: "Login successful!",token});
+
+    
+    // return res.json({ status: true, message: "Login successful!", token });
+  } catch (error) {
+    console.log(error);
+    res.json({status:false, message:"Error"});
   }
-
-  const validPassword = await bcrypt.compare(password, user.password);
-  if (!validPassword) {
-    return res.json({ status: false, message: "Incorrect password" });
-  }
-
-  const token = jwt.sign({ email: user.email, role: "user" }, process.env.KEY, {
-    expiresIn: "1h",
-  });
-
-  res.cookie("token", token, { httpOnly: true, maxAge: 3600000 });
-  return res.json({ status: true, message: "Login successful!", token });
 });
-
 
 const verifyUser = async (req, res, next) => {
   try {

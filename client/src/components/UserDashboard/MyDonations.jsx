@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { AuthContext } from '../../context/AuthContext'
+import { StoreContext } from '../../context/StoreContext';
 
 const MyDonations = () => {
-  const { token } = useContext(AuthContext);
+  const {token }=useContext(StoreContext);
   const [donations, setDonations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -163,4 +163,4 @@ const MyDonations = () => {
   )
 }
 
-export default MyDonations
+export default MyDonations;

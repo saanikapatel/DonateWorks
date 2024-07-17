@@ -2,12 +2,13 @@ import React, { useState, useContext } from "react";
 import "../css/UserForm.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from '../../context/AuthContext';
+import { StoreContext } from "../../context/StoreContext";
 
 const UserLogin = () => {
+
+  const {setToken}=useContext(StoreContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setToken } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -23,7 +24,11 @@ const UserLogin = () => {
       .then((response) => {
         if (response.data.status){
           setToken(response.data.token);
+          localStorage.setItem("token",response.data.token);
           navigate('/');
+        }
+        else{
+          alert("Error");
         }
       })
       .catch((err) => {

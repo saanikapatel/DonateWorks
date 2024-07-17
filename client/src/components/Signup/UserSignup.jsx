@@ -3,7 +3,7 @@ import "../css/UserForm.css";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from '../../context/AuthContext';
+import { StoreContext } from "../../context/StoreContext";
 
 const UserSignup = () => {
   const [formStep, setFormStep] = useState(0);
@@ -12,7 +12,7 @@ const UserSignup = () => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "all" });
-  const { setToken } = useContext(AuthContext);
+  const {setToken}=useContext(StoreContext);
 
   const title = ["Sign Up", "Additional Info"];
 

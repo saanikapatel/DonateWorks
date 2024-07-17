@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../css/UserForm.css";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { StoreContext } from "../../context/StoreContext";
 
 const NgoLogin = () => {
+
+  const {setToken}=useContext(StoreContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,7 +23,12 @@ const NgoLogin = () => {
       })
       .then((response) => {
         if (response.data.status){
+          setToken(response.data.token);
+          localStorage.setItem("token",response.data.token);
           navigate('/');
+        }
+        else{
+          alert("Error");
         }
       })
       .catch((err) => {
@@ -48,7 +56,6 @@ const NgoLogin = () => {
         />
 
         <button type="submit" className="userFormButton">Login</button>
-        {/* <p>Not registered with us? <Link to="/userSignup">Signup</Link></p> */}
       </form>
     </div>
   );
