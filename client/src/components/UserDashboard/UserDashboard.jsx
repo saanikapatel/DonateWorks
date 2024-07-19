@@ -18,7 +18,7 @@ const UserDashboard = () => {
       default:
         return null;
     }
-  };
+  }; 
 
   return (
     <div className="dashboard-container">

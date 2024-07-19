@@ -17,13 +17,11 @@ router.post('/donate', async (req, res) => {
         const token = req.cookies.token;
 
         if (!token) {
-            // console.log("test");
             return res.status(401).json({ message: 'Access denied. No token provided.' });
         }
-        // console.log(formData);
         const decoded = jwt.verify(token, process.env.KEY);
         const email = decoded.email;
- 
+  
         const newDonation = new Donation({
             email,
             clothingItems,
@@ -34,7 +32,6 @@ router.post('/donate', async (req, res) => {
             preferredDay
           });
 
-        //   console.log(newDonation);
         await newDonation.save();
 
         res.status(201).json({ message: 'Donation saved successfully', donation: newDonation });
@@ -46,7 +43,7 @@ router.post('/donate', async (req, res) => {
 
 router.get('/user-donations', async (req, res) => {
     try {
-      const token = req.cookies.token;
+      const token = req.cookies.token || req.headers['authorization']?.split(' ')[1];
       if (!token) {
         return res.status(401).json({ message: 'Access denied. No token provided.' });
       }

@@ -28,7 +28,7 @@ const Navbar = ({ onSelectOption }) => {
         </li>
       </ul>
     </nav>
-  );
+  ); 
 };
 
 export default Navbar;

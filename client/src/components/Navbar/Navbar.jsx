@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   const handleDashboardClick = () => {
-
+ 
     if (token) {
       try {
         const decoded = jwtDecode(token);

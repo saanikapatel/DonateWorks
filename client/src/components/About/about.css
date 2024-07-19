@@ -1,14 +1,14 @@
 .about-container{
-    border: 1px solid black;
-    margin: 10rem;
-    padding: 3rem;
+    margin: 9rem 7rem;
+    margin-bottom: 5rem;
+    padding: 5rem;
     border-radius: 20px;
-    background-color: #F0E6D6;
+    background-color: white;
     text-align: center;
 }
 
 .about-container h4{
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 .about-container span{
