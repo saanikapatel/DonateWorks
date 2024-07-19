@@ -10,6 +10,7 @@
   background-color: #cbb590;
   padding: 2rem 1.6rem;
   flex-direction: column;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .footer .secContent {
@@ -49,7 +50,7 @@
   gap: 0rem;
 }
 .footer .secContent .contactDiv .text {
-  color: white;
+  color: black;
 }
 .footer .secContent .contactDiv .text h3 {
   font-size: 1.8rem;
@@ -66,10 +67,11 @@
   width: 100%;
   padding: 0.5rem 0.6rem;
   border-radius: 3rem;
-  border: 1px solid white;
+  border: 1px solid black;
   outline: none;
   background: transparent;
   color: white;
+  
 }
 .footer .secContent .contactDiv .inputDiv input::-moz-placeholder {
   color: white;

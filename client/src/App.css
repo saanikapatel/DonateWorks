@@ -7,6 +7,7 @@
   font-family: "Poppins", sans-serif !important;
 }
 
+
 a{
   text-decoration: none;
 }
@@ -70,22 +71,8 @@ input{
 }
 
 body{
-  background: #FAF6F1;
+  background: white;
 }
-
-/* .sign-up-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.sign-up-form{
-  
-  padding: 1rem;
-  border: 1px solid black;
-  border-radius: 8px;
-} */
 
 label{
   

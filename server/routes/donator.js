@@ -43,6 +43,7 @@ router.post("/userSignup", async (req, res) => {
   }
 });
 
+
 router.post("/userLogin", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -67,13 +68,12 @@ router.post("/userLogin", async (req, res) => {
     res.cookie("token", token, { httpOnly: true, maxAge: 3600000 });
     res.json({status:true, message: "Login successful!",token});
 
-    
-    // return res.json({ status: true, message: "Login successful!", token });
   } catch (error) {
     console.log(error);
     res.json({status:false, message:"Error"});
   }
 });
+
 
 const verifyUser = async (req, res, next) => {
   try {
@@ -90,9 +90,11 @@ const verifyUser = async (req, res, next) => {
   }
 };
 
+
 router.get("/verify", verifyUser, (req, res) => {
   return res.json({ status: true, message: "Authorized" });
 });
+
 
 router.get("/logout", (req, res) => {
   res.clearCookie("token");

@@ -1,3 +1,4 @@
+
 .dashboard-container {
     display: flex;
     height: auto;
@@ -5,6 +6,7 @@
     margin: 8rem auto;
     border-radius: 10px;
     justify-content: space-between;
+    flex-wrap: nowrap;
   }
   
   .user-navbar {
@@ -42,103 +44,141 @@
     width: 100%;
     list-style-type: none;
     padding: 0;
-    /* background-color: red; */
   }
   
   .user-navbar li {
     margin-bottom: 2rem;
-    /* border: 1px solid black; */
   }
   
   .user-dashboard-content {
     flex: 5;
     padding: 20px;
-    background-color: #F0E6D6;
+    box-shadow: 1px 1px 5px #888888;
     border-radius: 10px;
     width: calc(100% - 250px);
-    margin-left: 330px; 
+    margin-left: 19rem; 
     padding: 20px;
-    background-color: #F0E6D6;
+    /* background-color: #F0E6D6; */
     flex-grow: 1;
     height: max-content;
     overflow-y: auto;
   }
+
+  .dash-user{
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
   
-  .each-card{
-    margin: 1rem;
-    border-radius: 5px;
-    background-color: white;
-    padding: 1rem;
+  .table-heading{
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
 
-  .donations-list {
-    background-color: #ffffff;
-    padding: 20px;
-    border: 1px solid #cccccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  .my-donations-table {
+    width: 100%;
+    border-collapse: collapse;
   }
   
-  .donation-item {
-    margin-bottom: 20px;
-    background-color: red;
+  .my-donations-table th, .donations-table td {
+    border: none;
+    padding: 0.8rem 0.5rem;
+    text-align: left;
   }
   
-  .section-title {
-    font-size: 1.2rem;
-    font-weight: bold;
+  .my-donations-table th{
+    color: grey;
+  }
+  .my-donations-table td{
+    padding: 0.8rem 0.5rem;
   }
   
-  .clothing-items {
-    list-style-type: none;
-    padding-left: 0;
-    padding: 0.5rem 0;
-  }
-  
-  .clothing-item {
-    margin-bottom: 10px;
-  }
-  
-  .age-groups {
-    list-style-type: none;
-    padding-left: 0;
-  }
-  
-  .age-group {
-    margin-right: 10px;
-    background-color: #f0f0f0;
-    color: #333;
-    padding: 0 8px;
-    border-radius: 5px;
-    display: inline-block;
-  }
-  
-  .description {
-    margin-left: 10px;
-    font-style: italic;
-  }
-  
-  .season, .condition, .preferred-day, .created-at, .weekday {
-    margin-top: 5px;
+  .my-donations-table th {
+    border-top: 2px solid grey; 
+    border-bottom: 2px solid grey; 
+    border-left: none;
+    border-right: none; 
   }
 
-  .first-row{
-    display: inline;
-    border: 1px solid black;
-    margin: 1rem 1rem;
-    padding: 0rem 1rem;
-    border-radius: 4px;
-    background-color: #aeaaa3;
+  
+  .circles-container{
+    width: 9.5rem;
+    height: 2.3rem; 
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: start;
+    align-items: center;
   }
   
-  .special-instructions {
-    white-space: pre-wrap; 
-  }
+  .item-circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #C35757;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+}
 
-  .rendered-desc{
-    margin-top: 10px;
-    padding: 0.5rem;
-    border: 1px solid black;
-  }
+.circle-info {
+    display: none;
+    text-align: center;
+}
+
+.item-circle.active {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: rgb(184, 91, 91);
+    z-index: 1;
+}
+
+.item-circle.hide {
+  display: none;
+}
+
+.item-circle.active .circle-info {
+  display: block;
+}
   
-  
+.delete-item{
+  font-size: 1.5rem;
+  color: #C35757;
+  border: 1px solid #C35757;
+  border-radius: 50px;
+  text-align: center;
+  height: 2rem;
+  width: 2rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+.delete-item:hover{
+  color: white;
+  border: 1px solid #C35757;
+  background: #C35757;
+}
+
+.my-donations-table .pending {
+  padding: 0; /* Remove padding for this specific cell */
+}
+ 
+.pending {
+  color: seagreen;
+  margin-top: 23px;
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 15px;
+  background-color: rgb(158, 188, 197);
+  padding: 0; /* Adjust this padding as needed */
+}
+
+.pending svg {
+  margin-right: 5px;
+  color: seagreen; /* Space between icon and text */
+}

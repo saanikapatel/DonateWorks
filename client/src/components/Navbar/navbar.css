@@ -3,6 +3,7 @@
   justify-content: center;
   width: 100%;
   background-color: #F0E6D6;
+  /* background-color: white; */
 }
  
 .header {
@@ -10,7 +11,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #F0E6D6;
+  background: #ece5da;
+  /* background-color: whitesmoke; */
   width: 95%;
   padding: 0.5rem;
   z-index: 1000;
@@ -24,6 +26,7 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
+  /* background-color: white; */
 }
 .header .logo .icon {
   font-size: 25px;
@@ -35,17 +38,19 @@
 }
 
 .navLists .btn-profile-icon{
-  color: white;
-  background-color: lightcoral;
-  border: 1px solid rgb(146, 57, 57);
+  color: black;
+  /* background-color: lightcoral; */
+  /* border: 2px solid rgb(146, 57, 57); */
+  border: 2px solid black;
   padding: 0.2rem 0.5rem;
-  border-radius: 10px;
+  border-radius: 20px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  width: 4rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   font-size: 1rem;
+  /* background-color: white; */
 }
 
 /* App.css */
@@ -94,7 +99,7 @@
 @media screen and (max-width: 768px) {
   .header .navBar {
     position: absolute;
-    background: white;
+    /* background: white; */
     height: -moz-max-content;
     height: max-content;
     width: 80%;
@@ -159,6 +164,7 @@
   }
   .header {
     padding: 0.5rem 1rem;
+    /* background-color: white; */
   }
   .header .navLists {
     display: flex;
@@ -167,7 +173,7 @@
     flex-direction: row;
   }
   .header .navLists .navItem .navLink {
-    padding: 0 0.45rem;
+    padding: 0 0.7rem;
     font-size: 0.9rem;
     font-weight: 500;
     color: black;
