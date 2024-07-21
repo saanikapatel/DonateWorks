@@ -7,11 +7,11 @@ const Choose = () => {
         <div className="choose-container">
             <div className="choose-item">
                 <img src={choose_donator} alt="" className="choose-item-img" />
-                <button className="btn"><Link to="/userSignup">Join as a donator</Link></button>
+                <button className="btn choose-btn"><Link to="/userSignup">Join as a donator</Link></button>
             </div>
             <div className="choose-item">
                 <img src={choose_ngo} alt="" className="choose-item-img" />
-                <button className="btn"><Link to="/ngoLogin">Join as an NGO</Link></button>
+                <button className="btn choose-btn"><Link to="/ngoLogin">Join as an NGO</Link></button>
             </div>
         </div>
     );

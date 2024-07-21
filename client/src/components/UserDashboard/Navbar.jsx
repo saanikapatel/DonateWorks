@@ -12,8 +12,8 @@ const Navbar = ({ onSelectOption }) => {
     localStorage.removeItem("token")
     setToken("");
     navigate("/");
-  }
-
+  } 
+ 
   return (
     <nav className="dashboard-navbar">
       <ul>

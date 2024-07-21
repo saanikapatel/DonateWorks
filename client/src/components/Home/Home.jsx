@@ -27,7 +27,7 @@ const Home = () => {
       <div className='video-container'>
       <video src={video} muted autoPlay loop type='video/mp4' id="background-video"></video> 
 
-      </div>
+      </div> 
         
         <div className="homeContent container">
           <div className="textDiv">

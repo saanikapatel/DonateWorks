@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 const router = express.Router();
 
 const app = express();
-
+ 
 // Middleware to parse cookies
 app.use(cookieParser());
  
@@ -41,6 +41,7 @@ router.post('/donate', async (req, res) => {
     }
 });
 
+
 router.get('/user-donations', async (req, res) => {
     try {
       const token = req.cookies.token || req.headers['authorization']?.split(' ')[1];
@@ -49,16 +50,38 @@ router.get('/user-donations', async (req, res) => {
       }
   
       const decoded = jwt.verify(token, process.env.KEY);
+
       const email = decoded.email;
   
       const donations = await Donation.find({ email });
-      console.log(donations);
       res.json(donations);
     } catch (error) {
-      console.error(error);
       res.status(500).json({ message: 'Error fetching donations' });
     }
   });
 
+
+  router.delete('/delete-donation/:id', async (req, res) => {
+    try {
+      const token = req.cookies.token || req.headers['authorization']?.split(' ')[1];
+      if (!token) {
+        return res.status(401).json({ message: 'Access denied. No token provided.' });
+      } 
   
+      const decoded = jwt.verify(token, process.env.KEY);
+      const email = decoded.email;
+  
+      const donation = await Donation.findOneAndDelete({ _id: req.params.id, email });
+  
+      if (!donation) {
+        return res.status(404).json({ message: 'Donation not found' });
+      }
+  
+      res.status(200).json({ message: 'Donation deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error deleting donation' });
+    }
+  });
+
 export {router as DonationRouter};

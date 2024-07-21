@@ -3,11 +3,10 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-dotenv.config(); 
+dotenv.config();
 import { DonationRouter } from "./routes/donation.js";
 import { DonatorRouter } from "./routes/donator.js";
 import { NgoRouter } from "./routes/ngo.js";
-
 import { NgoInfo } from "./models/NgoInfo.js";
 import bcrypt from "bcrypt";
  
@@ -20,7 +19,7 @@ app.use(
   })
 );
 app.use(cookieParser());
- 
+  
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {

@@ -66,6 +66,12 @@ const Navbar = () => {
     };
   }, [isOpen]);
 
+  const closeNavOnItemClick = () => {
+    setIsOpen(false)
+    removeNav();
+    
+  };
+
 
   return (
     <section className="navBarSection">
@@ -73,28 +79,28 @@ const Navbar = () => {
         <div className="logoDiv">
           <a href="/" className="logo flex">
             <h1><BiSolidDonateHeart className="icon" />Gener<span>us</span></h1>
-          </a>
+          </a> 
         </div>
 
         <div className={active}>
           <ul className="navLists flex">
             <li className="navItem">
-              <Link to="/" className="navLink">
+              <Link to="/" className="navLink"  onClick={closeNavOnItemClick}>
                 Home
               </Link>
             </li>
             <li className="navItem">
-              <Link to="/about" className="navLink">
+              <Link to="/about" className="navLink"  onClick={closeNavOnItemClick}>
                 About
               </Link>
             </li>
             <li className="navItem">
-              <a href="#" className="navLink">
+              <a href="#" className="navLink"  onClick={closeNavOnItemClick}>
                 NGOs
               </a>
             </li>
-
-            {token ? (
+ 
+            {token ? ( 
               <button className="btn-profile-icon" onClick={handleDashboardClick}>
                 <FaUser />
               </button>
@@ -106,8 +112,8 @@ const Navbar = () => {
                 </button>
                 {isOpen && (
                   <div className="dropdown-content">
-                    <Link to="/userLogin" onClick={() => setIsOpen(false)} className="drop-options">Donator</Link>
-                    <Link to="/ngoLogin" onClick={() => setIsOpen(false)} className="drop-options">NGO</Link>
+                    <Link to="/userLogin" onClick={closeNavOnItemClick} className="drop-options">Donator</Link>
+                    <Link to="/ngoLogin" onClick={closeNavOnItemClick} className="drop-options">NGO</Link>
                   </div>
                 )}
               </div>

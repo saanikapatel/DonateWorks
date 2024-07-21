@@ -41,7 +41,7 @@ const UserSignup = () => {
         >
           Next
         </button>
-      );
+      ); 
     }
   };
 
