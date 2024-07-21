@@ -44,13 +44,13 @@ router.post('/donate', async (req, res) => {
 
 router.get('/user-donations', async (req, res) => {
     try {
-      const token = req.cookies.token || req.headers['authorization']?.split(' ')[1];
+      // const token = req.cookies.token || req.headers['authorization']?.split(' ')[1];
+      const token = req.cookies.token;
       if (!token) {
         return res.status(401).json({ message: 'Access denied. No token provided.' });
       }
   
       const decoded = jwt.verify(token, process.env.KEY);
-
       const email = decoded.email;
   
       const donations = await Donation.find({ email });
@@ -63,7 +63,8 @@ router.get('/user-donations', async (req, res) => {
 
   router.delete('/delete-donation/:id', async (req, res) => {
     try {
-      const token = req.cookies.token || req.headers['authorization']?.split(' ')[1];
+      // const token = req.cookies.token || req.headers['authorization']?.split(' ')[1];
+      const token = req.cookies.token;
       if (!token) {
         return res.status(401).json({ message: 'Access denied. No token provided.' });
       } 

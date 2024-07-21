@@ -35,9 +35,10 @@ const MyDonations = () => {
       console.log("Token before API request:", token); 
       try {
         const response = await axios.get('http://localhost:4000/user-donations', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          // headers: {
+          //   Authorization: `Bearer ${token}`,
+          // },
+          withCredentials: true,
         });
         setDonations(response.data);
       } catch (error) {
@@ -58,14 +59,15 @@ const MyDonations = () => {
   if (loading) return <p>Loading...</p>;
   if (loadingData) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
-
+ 
   
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:4000/delete-donation/${donationToDelete}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
+        withCredentials: true,
       });
       setDonations(donations.filter(donation => donation._id !== donationToDelete));
       setShowDialog(false);

@@ -19,7 +19,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-  
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
