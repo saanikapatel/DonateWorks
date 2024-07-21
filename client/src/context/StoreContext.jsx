@@ -6,6 +6,7 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     const expiryDate = localStorage.getItem("expiryDate");

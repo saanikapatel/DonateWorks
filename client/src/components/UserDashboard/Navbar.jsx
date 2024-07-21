@@ -12,8 +12,8 @@ const Navbar = ({ onSelectOption }) => {
     localStorage.removeItem("token")
     setToken("");
     navigate("/");
-  }
-
+  } 
+ 
   return (
     <nav className="dashboard-navbar">
       <ul>
@@ -25,7 +25,7 @@ const Navbar = ({ onSelectOption }) => {
         </li>
         <li onClick={logout}>
           <button onClick={() => onSelectOption("logout")} className="logout-button">Logout</button>
-        </li>
+        </li> 
       </ul>
     </nav>
   ); 

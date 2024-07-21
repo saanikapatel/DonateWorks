@@ -10,7 +10,9 @@ const MyDonations = () => {
   const [donations, setDonations] = useState([]);
   const [loadingData, setLoadingData] = useState(true);
   const [error, setError] = useState(null);
-
+  const [showDialog, setShowDialog] = useState(false);
+  const [donationToDelete, setDonationToDelete] = useState(null);
+ 
   const customLabels = {
     menClothes: "Men's Clothes",
     womenClothes: "Women's Clothes",
@@ -20,7 +22,7 @@ const MyDonations = () => {
     summer: "Summer",
     winter: "Winter",
     allSeason: "All season",
-    new: "New",
+    newCondition: "New",
     used: "Used",
     needsMinorRepairs: "Needs Repairs",
     weekdays: "Weekdays",
@@ -30,16 +32,17 @@ const MyDonations = () => {
 
   useEffect(() => {
     const fetchDonations = async () => {
-      console.log("Token before API request:", token); // Debugging log
+      console.log("Token before API request:", token); 
       try {
         const response = await axios.get('http://localhost:4000/user-donations', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          // headers: {
+          //   Authorization: `Bearer ${token}`,
+          // },
+          withCredentials: true,
         });
         setDonations(response.data);
       } catch (error) {
-        setError(error.response?.data?.message || 'Error fetching donations');
+        setError(error.response?.data?.message || 'Error fetching donations!!!');
       } finally {
         setLoadingData(false);
       }
@@ -56,6 +59,34 @@ const MyDonations = () => {
   if (loading) return <p>Loading...</p>;
   if (loadingData) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
+ 
+  
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:4000/delete-donation/${donationToDelete}`, {
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
+        withCredentials: true,
+      });
+      setDonations(donations.filter(donation => donation._id !== donationToDelete));
+      setShowDialog(false);
+      setDonationToDelete(null);
+    } catch (error) {
+      setError(error.response?.data?.message || 'Error deleting donation');
+    }
+  };
+
+  const openDialog = (id) => {
+    setDonationToDelete(id);
+    setShowDialog(true);
+  };
+
+  const closeDialog = () => {
+    setShowDialog(false);
+    setDonationToDelete(null);
+  };
+
 
   const renderClothingItems = (clothingItems) => {
    
@@ -158,15 +189,27 @@ const MyDonations = () => {
               <td>{new Date(donation.createdAt).toLocaleDateString()}
               {donation.createdAt && (
                 <div> {new Date(donation.createdAt).toLocaleDateString('en-US', { weekday: 'long' })}</div>
-              )}
+              )} 
               </td>
               <td>
-                <button className='delete-item'><MdDelete /></button>
+                <button className='delete-item' onClick={() => openDialog(donation._id)}><MdDelete /></button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {showDialog && (
+        <div className="dialog-overlay">
+          <div className="dialog-box">
+            <p>Are you sure you want to delete?</p>
+            <div className="dialog-buttons">
+              <button onClick={handleDelete}>Yes</button>
+              <button onClick={closeDialog}>No</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
     // <div className='donations-card-container'>
     //   <div>

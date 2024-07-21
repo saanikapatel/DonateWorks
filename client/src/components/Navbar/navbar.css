@@ -1,9 +1,14 @@
 .navBarSection {
   display: flex;
   justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: #F0E6D6;
-  /* background-color: white; */
+  z-index: 1000;
+  background: transparent; /* Adjust transparency as needed */
+  backdrop-filter: blur(6px); 
+  height: 6.5rem;
 }
  
 .header {
@@ -99,7 +104,7 @@
 @media screen and (max-width: 768px) {
   .header .navBar {
     position: absolute;
-    /* background: white; */
+    background: white;
     height: -moz-max-content;
     height: max-content;
     width: 80%;
@@ -176,7 +181,7 @@
     padding: 0 0.7rem;
     font-size: 0.9rem;
     font-weight: 500;
-    color: black;
+    color: black; 
   }
   .header .navLists .navItem .navLink:hover {
     color: lightcoral;

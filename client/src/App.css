@@ -43,9 +43,7 @@ li{
 .btn{
   padding: 0.6rem 1.5rem;
   background: #F0A7A1;
-  /* background: #E0AED0; */
   border-radius: 3rem;
-  /* border: 2px solid #1995AD; */
   outline: none;
   cursor: pointer;
   border: 1px solid #F08080;
@@ -89,10 +87,10 @@ input{
 .tab {
   display: none;
 }
-
+ 
 .choose-container{
-  margin-top: 5rem;
-  background-color: #FAF6F1;
+  margin: 0 4rem;
+  margin-top: 7rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,3 +114,31 @@ input{
 }
 
 
+@media screen and (max-width: 1000px){
+
+  .choose-item{
+    padding: 1.8rem;
+  }
+  .choose-item img{
+    width: 13rem;
+    height: 13rem;
+  }
+
+}
+
+@media screen and (max-width: 680px){
+
+  .choose-item{
+    padding: 1rem;
+  }
+  .choose-item img{
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .choose-btn{
+    padding: 0.4rem;
+    font-size: 0.5rem;
+  }
+  
+}
