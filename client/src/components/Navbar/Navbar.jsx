@@ -30,8 +30,8 @@ const Navbar = () => {
       try {
         const decoded = jwtDecode(token);
         const role = decoded.role;
-        console.log('Token:', token);
-        console.log('Role:', role);
+        // console.log('Token:', token);
+        // console.log('Role:', role);
 
         if (role === 'user') {
           navigate('/userDashboard');

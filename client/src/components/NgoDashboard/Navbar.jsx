@@ -17,7 +17,7 @@ const Navbar = ({ onSelectOption }) => {
     <nav className="dashboard-navbar">
       <ul>
         <li>
-          <button onClick={() => onSelectOption("donations-available")}>
+          <button onClick={() => onSelectOption("active-donations")}>
             Active Donations
           </button>
         </li>

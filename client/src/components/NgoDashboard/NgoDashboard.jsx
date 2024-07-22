@@ -1,24 +1,36 @@
-import React, { useContext } from 'react'
-import { StoreContext } from '../../context/StoreContext'
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import Navbar from "./Navbar";
+import ActiveDonations from "./ActiveDonations";
+import EditProfile from './EditProfile';
+import './ngoDashboard.css'
+
 
 const NgoDashboard = () => {
+  const [selectedOption, setSelectedOption] = useState("active-donations");
 
-  const {setToken}=useContext(StoreContext);
-  const navigate=useNavigate();
-  const logout=()=>{
-    localStorage.removeItem("token")
-    setToken("");
-    navigate("/");
-  }
-
+  const renderContent = () => {
+    switch (selectedOption) {
+      case "active-donations":
+        return <ActiveDonations/>;
+      case "editProfile":
+        return <EditProfile />;
+      // case "logout":
+      //   return <Logout />;
+      default:
+        return null;
+    }
+  };
 
   return (
-    <div>
-      Ngo
-      <button onClick={logout}>Logout</button>
+    <div className="dashboard-container">
+      <div className="user-navbar">
+        <Navbar onSelectOption={setSelectedOption} />
+      </div>
+      <div className="user-dashboard-content">
+        {renderContent()}
+      </div>
     </div>
-  )
+  );
 }
 
-export default NgoDashboard
+export default NgoDashboard;
