@@ -3,7 +3,7 @@ import React from 'react'
 const ActiveDonations = () => {
   return (
     <div>
-      donations
+      active donations
     </div>
   )
 }
