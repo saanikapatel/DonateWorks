@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import './ngoDashboard.css';
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
 
