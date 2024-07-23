@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import ActiveDonations from './ActiveDonations'
 import EditProfile from './EditProfile';
-import './ngoDashboard.css'
 
 const UserDashboard = () => {
   const [selectedOption, setSelectedOption] = useState("active-donations");

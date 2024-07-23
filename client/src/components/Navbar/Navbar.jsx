@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const showNav = () => {
     setActive("navBar activeNavbar");
-  };
+  }; 
 
   const removeNav = () => {
     setActive("navBar");
@@ -71,7 +71,6 @@ const Navbar = () => {
     removeNav();
     
   };
-
 
   return (
     <section className="navBarSection">

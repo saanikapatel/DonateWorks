@@ -38,8 +38,6 @@ app.use("/", DonationRouter);
  
 
 
-   
-
 //code to insert NGO data manually given down below
 
 
