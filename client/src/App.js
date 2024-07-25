@@ -11,6 +11,7 @@ import NgoLogin from "./components/Login/NgoLogin";
 import UserDashboard from "./components/UserDashboard/UserDashboard";
 import NgoDashboard from "./components/NgoDashboard/NgoDashboard";
 import About from "./components/About/About";
+import NgoInfo from "./components/Ngo/NgoInfo";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function MainRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/ngoInfo" element={<NgoInfo/>} />
         <Route path="/donate" element={<DonorForm />} />
         <Route path="/choose" element={<Choose />} />
         <Route path="/userSignup" element={<UserSignup />} />
