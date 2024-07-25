@@ -14,9 +14,12 @@ import About from "./components/About/About";
 import NgoInfo from "./components/Ngo/NgoInfo";
 
 function App() {
+  const location = useLocation();
+  const hideNavbarPaths = ["/userDashboard", "/ngoDashboard"];
+
   return (
     <>
-      <Navbar />
+      {!hideNavbarPaths.includes(location.pathname) && <Navbar />}
       <MainRoutes />
     </>
   );

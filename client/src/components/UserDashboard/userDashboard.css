@@ -1,23 +1,57 @@
+.user-dash{
+  background-color: #d8cebd;
+  padding: 1.5rem 0.7rem;
+  height: 100vh;
+}
 
-.dashboard-container {
+.back-home .home-icon .icon{
+  font-size: 0.7rem;
+  margin-right: 0.3rem;
+  
+}
+.back-home .home-icon{
+  font-size: 0.6rem;
+  color: black;
+  text-decoration: underline;
+}
+
+.nav-tag{
+  text-align: center;
+  border-bottom: 1px solid grey;
+  padding-bottom: 25px;
+  
+}
+
+.nav-tag-icon{
+  color: lightcoral;
+}
+.nav-tag span{
+  color: lightcoral;
+}
+
+.user-dash .dashboard-container {
     display: flex;
-    height: auto;
     width: 94%;
-    margin: 8rem auto;
+    margin: 2rem auto;
     border-radius: 10px;
-    justify-content: space-between;
-    flex-wrap: nowrap;
+    height: 88vh;
   }
   
   .user-navbar {
     flex: 1;
-    width: 18%;
-    background-color: #F0E6D6;
-    padding: 3rem 1rem;
-    margin-right: 1.5rem;
+    background-color:#ECE5DA;
+    padding: 2rem 1rem;
     border-radius: 10px;
-    height: 75vh;
-    position: fixed;
+    min-width: 10rem; 
+    max-width: 20rem;
+    margin-right: 30px; 
+  }
+
+  .user-menu{
+    display: none;
+  }
+  .close-menu{
+    display: none;
   }
  
   .dashboard-navbar{
@@ -27,16 +61,31 @@
   .dashboard-navbar button{
     width: 100%;
     color: lightcoral;
-    background-color: white;
+    background: transparent;
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.7rem 1rem;
     font-size: 0.9rem;
-    border-radius: 5px;
+    border-radius: 40px;
     cursor: pointer;
+  }
+
+  .dashboard-navbar button:hover{
+    background-color: white;
+    border-radius: 40px;
+  }
+
+  .dashboard-navbar button.active {
+    background-color: white;
   }
 
   .dashboard-navbar .logout-button{
     background-color: rgb(195, 87, 87);
+    color: white;
+    border-radius: 40px;
+  } 
+
+  .dashboard-navbar .logout-button:hover{
+    background-color: rgb(163, 71, 71);
     color: white;
   } 
   
@@ -55,13 +104,9 @@
     padding: 20px;
     box-shadow: 1px 1px 5px #888888;
     border-radius: 10px;
-    width: calc(100% - 250px);
-    margin-left: 19rem; 
-    padding: 20px;
-    /* background-color: #F0E6D6; */
-    flex-grow: 1;
-    height: max-content;
     overflow-y: auto;
+    min-width: 300px; 
+    background-color: rgb(234, 234, 234);
   }
 
   .dash-user{
@@ -80,8 +125,9 @@
   }
   
   .my-donations-table th, .donations-table td {
-    border: none;
-    padding: 0.8rem 0.5rem;
+    /* border: none; */
+    border: 1px solid black;
+    padding: 0.8rem 0.3rem;
     text-align: left;
   }
   
@@ -89,19 +135,67 @@
     color: grey;
   }
   .my-donations-table td{
-    padding: 0.8rem 0.5rem;
+    padding: 0.8rem 0.3rem;
+    /* border: 1px solid black; */
   }
-  
+
+  .my-donations-table th:nth-child(1),
+.my-donations-table td:nth-child(1) {
+  width: 190px; 
+  padding: 0.8rem 0.1rem;
+}
+.my-donations-table th:nth-child(2),
+.my-donations-table td:nth-child(2) {
+  width: 200px; 
+  padding: 0.8rem 0.1rem;
+  /* text-align: center; */
+}
+.my-donations-table th:nth-child(3),
+.my-donations-table td:nth-child(3) {
+  width: 40px; 
+  padding: 0.8rem 0.1rem;
+  padding-right: 0.7rem;
+}
+.my-donations-table th:nth-child(4),
+.my-donations-table td:nth-child(4) {
+  width: 200px; 
+  padding: 0.8rem 0.1rem;
+  /* text-align: center; */
+}
+.my-donations-table th:nth-child(5),
+.my-donations-table td:nth-child(5) {
+  width: 120px; 
+  padding: 0.8rem 0.1rem;
+  /* text-align: center; */
+}
+.my-donations-table th:nth-child(6),
+.my-donations-table td:nth-child(6) {
+  width: 100px; 
+  /* padding: 0.8rem 0.1rem; */
+  /* text-align: center; */
+}
+.my-donations-table th:nth-child(7),
+.my-donations-table td:nth-child(7) {
+  width: 120px; 
+  padding: 0.8rem 0.1rem;
+  text-align: center;
+}
+.my-donations-table th:nth-child(8),
+.my-donations-table td:nth-child(8) {
+  width: 80px; 
+  padding: 0.8rem 0.1rem;
+  text-align: center;
+}
   .my-donations-table th {
     border-top: 2px solid grey; 
     border-bottom: 2px solid grey; 
     border-left: none;
-    border-right: none; 
+    border-right: none;
+    /* border-left: 1px solid black;
+  border-right: 1px solid black;   */
   }
-
-  
   .circles-container{
-    width: 9.5rem;
+    width: 8.5rem;
     height: 2.3rem; 
     border-radius: 10px;
     overflow: hidden;
@@ -122,6 +216,7 @@
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     position: relative;
+    margin: 0 1px;
 }
 
 .circle-info {
@@ -220,3 +315,49 @@
 .dialog-buttons button:hover {
   background-color: #ddd;
 }
+
+@media screen and (max-width: 1000px){
+  .dashboard-container{
+    flex-direction: column;
+  }
+  .user-menu{
+    display: block;
+    width: max-content;
+    border: 1px solid black;
+    padding: 0rem 0.6rem;
+    font-size: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+  .user-navbar{
+    position: absolute;
+    height: 100vh;
+    width: 80%;
+    /* border-radius: 1rem; */
+    top: 0;
+    left: -100%;
+    padding: 1rem;
+    transform: translateX(0);
+    z-index: 2000;
+    box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
+    transition: left 0.3s ease-in-out;
+    
+
+  }
+  .nav-visible{
+      left: 0rem;
+  }
+
+  .close-menu {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    color: lightcoral;
+  }
+  .close-menu:hover {
+    color: black;
+  }
+}
+
