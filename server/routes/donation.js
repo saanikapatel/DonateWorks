@@ -11,8 +11,7 @@ const app = express();
 app.use(cookieParser());
  
 router.post('/donate', async (req, res) => {
-    try {
-         
+    try {       
         const { clothingItems, season, quantity, condition, specialInstructions, preferredDay } = req.body;
         const token = req.cookies.token;
 

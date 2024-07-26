@@ -11,10 +11,12 @@ import NgoLogin from "./components/Login/NgoLogin";
 import UserDashboard from "./components/UserDashboard/UserDashboard";
 import NgoDashboard from "./components/NgoDashboard/NgoDashboard";
 import About from "./components/About/About";
+import EditProfile from './components/UserDashboard/EditProfile';
+
 
 function App() {
   const location = useLocation();
-  const hideNavbarPaths = ["/userDashboard", "/ngoDashboard"];
+  const hideNavbarPaths = ["/userDashboard", "/ngoDashboard", "/editProfile/:id"];
 
   return (
     <>
@@ -26,7 +28,7 @@ function App() {
 
 function MainRoutes() {
   const location = useLocation();
-  const hideFooterPaths = ["/userDashboard", "/ngoDashboard"];
+  const hideFooterPaths = ["/userDashboard", "/ngoDashboard", "/editProfile/:id"];
 
   return (
     <>
@@ -40,6 +42,7 @@ function MainRoutes() {
         <Route path="/ngoLogin" element={<NgoLogin />} />
         <Route path="/userDashboard" element={<UserDashboard />} />
         <Route path="/ngoDashboard" element={<NgoDashboard />} />
+        <Route path="/editProfile/:id" element={<EditProfile />} />
       </Routes>
       {!hideFooterPaths.includes(location.pathname) && <Footer />}
     </>
