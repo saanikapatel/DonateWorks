@@ -3,7 +3,6 @@ import Navbar from "./Navbar";
 import ActiveDonations from './ActiveDonations';
 import EditProfile from './EditProfile';
 
-import './ngoDashboard.css';
 import { useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 
