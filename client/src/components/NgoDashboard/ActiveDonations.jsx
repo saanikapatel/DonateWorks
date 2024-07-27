@@ -9,7 +9,7 @@ const itemTypeNames = {
   blanketsShawls: "Blankets & Shawls",
   childrenClothes: "Children's Clothes",
   other: "Other"
-};
+}; 
 
 const preferredDayNames = {
   weekdays: "Weekdays",
@@ -20,6 +20,9 @@ const ActiveDonations = () => {
   const [donations, setDonations] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [donationsPerPage] = useState(10);
+  const [error, setError] = useState(null);
+  const [showDialog, setShowDialog] = useState(false);
+  const [donationToAccept, setDonationToAccept] = useState(null);
 
   useEffect(() => {
     axios
@@ -33,6 +36,34 @@ const ActiveDonations = () => {
         console.error("Error fetching donations:", error);
       });
   }, []);
+ 
+  const handleAccept = async () => {
+    try {
+      await axios.post(`http://localhost:4000/accept-donation/${donationToAccept}`, {
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
+        withCredentials: true,
+      }); 
+      setDonations(donations.filter(donation => donation._id !== donationToAccept));
+      setShowDialog(false);
+      alert('Invite sent to user successfully!');
+      setDonationToAccept(null);
+    } catch (error) {
+      setError(error.response?.data?.message || 'Error accepting donation');
+    }
+  };
+
+  const openDialog = (id) => {
+    setDonationToAccept(id);
+    setShowDialog(true);
+  };
+
+  const closeDialog = () => {
+    setShowDialog(false);
+    setDonationToAccept(null);
+  };
+
 
   const indexOfLastDonation = currentPage * donationsPerPage;
   const indexOfFirstDonation = indexOfLastDonation - donationsPerPage;
@@ -69,7 +100,7 @@ const ActiveDonations = () => {
                   .map((item, index) => (
                     <div key={index}>{itemTypeNames[item.type]}</div>
                   ))}
-              </td>
+              </td> 
               <td>{donation.quantity}</td>
               <td>
                 {donation.condition.newCondition && <div>New</div>}
@@ -77,15 +108,31 @@ const ActiveDonations = () => {
                 {donation.condition.needsMinorRepairs && (
                   <div>Needs Minor Repairs</div>
                 )}
-              </td>
+              </td> 
               <td>{donation.specialInstructions}</td>
               <td>{preferredDayNames[donation.preferredDay]}</td>
               <td>{new Date(donation.createdAt).toLocaleDateString()}</td>
-              <td><button className="contact-donator-btn">Contact</button></td>
+              <td>{donation.status === 'Pending' && (
+                  <button onClick={() => openDialog(donation._id)}>Accept</button>
+                )}
+                {donation.status === 'Accepted by NGO' && <span>Accepted</span>}
+                {donation.status === 'Fully Accepted' && <span>Confirmed</span>}</td>
+                
             </tr>
           ))}
         </tbody>
       </table>
+      {showDialog && (
+        <div className="dialog-overlay">
+          <div className="dialog-box">
+            <p>Are you sure you want to accept this donation?</p>
+            <div className="dialog-buttons">
+              <button onClick={handleAccept}>Yes</button>
+              <button onClick={closeDialog}>No</button>
+            </div>
+          </div>
+        </div>
+      )}
       <Pagination
         donationsPerPage={donationsPerPage}
         totalDonations={donations.length}

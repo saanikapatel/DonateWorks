@@ -28,13 +28,14 @@ const NgoDashboard = () => {
         return null;
     }
   };
-
-  return (
-    <div className="dashboard-container">
-      <div className="user-navbar">
+ 
+  
+  return ( 
+    <div className="ngo-dashboard-container"> 
+      <div className="ngo-navbar">
         <Navbar onSelectOption={setSelectedOption} />
       </div>
-      <div className="user-dashboard-content">
+      <div className="ngo-dashboard-content">
         {renderContent()}
       </div>
     </div>

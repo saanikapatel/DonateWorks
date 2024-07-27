@@ -5,15 +5,15 @@ import { useNavigate } from "react-router-dom";
 const Navbar = ({ onSelectOption }) => {
   const { setToken } = useContext(StoreContext);
   const navigate = useNavigate();
-
+ 
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
     navigate("/");
-  };
+  }; 
 
   return (
-    <nav className="dashboard-navbar">
+    <nav className="ngo-dashboard-navbar">
       <ul>
         <li>
           <button onClick={() => onSelectOption("active-donations")}>
