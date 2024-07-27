@@ -1,5 +1,10 @@
 import mongoose from "mongoose";
 
+const NotificationSchema = new mongoose.Schema({
+    message: { type: String, required: true },
+    status: { type: String, default: "Pending" } // Can be "Pending", "Accepted", etc.
+});
+
 const ChildrenAgeGroupsSchema = new mongoose.Schema({
     '3-5': Boolean,
     '6-8': Boolean,
@@ -31,6 +36,8 @@ const DonationSchema = new mongoose.Schema({
     },
     specialInstructions: String,
     preferredDay: String,
+    status: {type: String, default: "Pending"},
+    notifications: [NotificationSchema],
     createdAt: {
         type: Date,
         default: Date.now

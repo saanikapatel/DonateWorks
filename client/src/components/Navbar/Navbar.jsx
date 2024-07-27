@@ -30,8 +30,8 @@ const Navbar = () => {
       try {
         const decoded = jwtDecode(token);
         const role = decoded.role;
-        console.log('Token:', token);
-        console.log('Role:', role);
+        // console.log('Token:', token);
+        // console.log('Role:', role);
 
         if (role === 'user') {
           navigate('/userDashboard');
@@ -94,10 +94,19 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="navItem">
-              <a href="#" className="navLink"  onClick={closeNavOnItemClick}>
+              <a href="/ngoInfo" className="navLink"  onClick={closeNavOnItemClick}>
                 NGOs
               </a>
             </li>
+            {token?(
+              <li className="navItem">
+              <p className="navLink" onClick={handleDashboardClick} style={{ cursor: 'pointer' }}>
+                Dashboard
+              </p>
+            </li>
+            ):(
+              null
+            )}
  
             {token ? ( 
               <button className="btn-profile-icon" onClick={handleDashboardClick}>

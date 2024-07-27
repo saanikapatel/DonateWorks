@@ -34,6 +34,7 @@ const DonorForm = () => {
         },
         specialInstructions: '',
         preferredDay: '',
+        status: "Pending",
     });
     const [currentTab, setCurrentTab] = useState(0);
     const [formError, setFormError] = useState('');
@@ -106,7 +107,8 @@ const DonorForm = () => {
                 needsMinorRepairs: formData.condition.needsMinorRepairs
             }, 
             specialInstructions: formData.specialInstructions,
-            preferredDay: formData.preferredDay
+            preferredDay: formData.preferredDay,
+            status: formData.status,
         };
 
         Axios.post("http://localhost:4000/donate", dataToSend, { withCredentials: true })

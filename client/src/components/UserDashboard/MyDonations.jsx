@@ -78,6 +78,18 @@ const MyDonations = () => {
     }
   };
 
+  const handleConfirm = async (id) => {
+    try {
+      await axios.post(`http://localhost:4000/user-accept/${id}`, {}, {
+        withCredentials: true,
+      });
+      setDonations(donations.filter(donation => donation._id !== id));
+      alert("Pickup confirmed!");
+    } catch (error) {
+      setError(error.response?.data?.message || 'Error confirming donation');
+    }
+  };
+
   const openDialog = (id) => {
     setDonationToDelete(id);
     setShowDialog(true);
@@ -87,7 +99,6 @@ const MyDonations = () => {
     setShowDialog(false);
     setDonationToDelete(null);
   };
-
 
   const renderClothingItems = (clothingItems) => {
    
@@ -149,8 +160,7 @@ const MyDonations = () => {
       .map(key => customLabels[key]) 
       .join(', ');
   };
-
-  
+ 
   const renderPreferredDay = (preferredDay) => {
     if (preferredDay === 'weekdays') {
       return customLabels.weekdays;
@@ -177,8 +187,8 @@ const MyDonations = () => {
             <th>Created At</th>
             <th>Delete</th>
           </tr>
-        </thead>
-        <tbody>
+        </thead> 
+        <tbody> 
           {donations.map(donation => (
             <tr key={donation._id}>
               <td>{renderClothingItems(donation.clothingItems)}</td>
@@ -186,7 +196,13 @@ const MyDonations = () => {
               <td>{donation.quantity}</td>
               <td>{renderCondition(donation.condition)}</td>
               <td>{renderPreferredDay(donation.preferredDay)}</td>
-              <td className='pending'><IoMdTime />Pending</td>
+              <td>{donation.status === 'Pending' ? (
+                  <div className='pending'><IoMdTime />Pending</div>
+                ) : donation.status === 'Accepted by NGO' ? (
+                  <button className='accept-button' onClick={() => handleConfirm(donation._id)}>Confirm</button>
+                ) : (
+                  <div className='confirmed'>Confirmed</div>
+                )}</td>
               <td>{new Date(donation.createdAt).toLocaleDateString()}
               {donation.createdAt && (
                 <div> {new Date(donation.createdAt).toLocaleDateString('en-US', { weekday: 'long' })}</div>
@@ -197,7 +213,7 @@ const MyDonations = () => {
               </td>
             </tr>
           ))}
-        </tbody>
+        </tbody> 
       </table>
 
       {showDialog && (

@@ -23,7 +23,7 @@ const UserLogin = () => {
           setToken(token);
           localStorage.setItem("token", token);
           localStorage.setItem("expiryDate", expiryDate);
-          navigate('/');
+          navigate('/userDashboard');
         } else {
           alert("Error");
         }
