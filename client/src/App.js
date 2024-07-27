@@ -12,7 +12,6 @@ import UserDashboard from "./components/UserDashboard/UserDashboard";
 import NgoDashboard from "./components/NgoDashboard/NgoDashboard";
 import About from "./components/About/About";
 import EditProfile from './components/UserDashboard/EditProfile';
-
 import NgoInfo from "./components/Ngo/NgoInfo";
 
 function App() {
