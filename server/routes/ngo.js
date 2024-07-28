@@ -35,7 +35,9 @@ router.post("/ngoLogin", async (req, res) => {
       console.log(error);
       res.json({status:false, message:"Error"});
     }
-  });
+  }); 
+
+  
   
   
   

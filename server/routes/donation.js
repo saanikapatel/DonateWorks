@@ -19,6 +19,7 @@ router.post("/donate", async (req, res) => {
       condition,
       specialInstructions,
       preferredDay,
+      status,
     } = req.body;
     const token = req.cookies.token;
 
@@ -38,6 +39,7 @@ router.post("/donate", async (req, res) => {
       condition,
       specialInstructions,
       preferredDay,
+      status
     });
 
     await newDonation.save();
@@ -100,6 +102,54 @@ router.delete("/delete-donation/:id", async (req, res) => {
   }
 });
 
+router.post('/accept-donation/:id', async (req, res) => {
+  const donationId = req.params.id;
+  
+  try {
+      const donation = await Donation.findById(donationId);
+      if (!donation) {
+          return res.status(404).json({ error: 'Donation not found' });
+      }
+ 
+      // Update the donation status and add a notification
+      donation.status = "Accepted by NGO";
+      donation.notifications.push({
+          message: 'Your donation has been accepted by the NGO',
+          status: 'Pending'
+      });
+
+      await donation.save();
+      res.status(200).json({ message: 'Donation accepted and user notified' });
+  } catch (error) {
+      res.status(500).json({ error: 'Failed to accept donation' });
+  }
+})
+
+router.post('/user-accept/:id', async (req, res) => {
+  const donationId = req.params.id;
+
+  try {
+      const donation = await Donation.findById(donationId);
+      if (!donation) {
+          return res.status(404).json({ error: 'Donation not found' });
+      }
+
+      // Update the notification status and donation status
+      const notification = donation.notifications.find(notif => notif.message === 'Your donation has been accepted by the NGO' && notif.status === 'Pending');
+      if (notification) {
+          notification.status = 'Accepted by User';
+      }
+
+      donation.status = "Fully Accepted";
+      await donation.save();
+
+      res.status(200).json({ message: 'Donation fully accepted' });
+  } catch (error) {
+      res.status(500).json({ error: 'Failed to accept donation' });
+  }
+}); 
+
+
 router.get("/donations", async (req, res) => {
   try {
     const donations = await Donation.find({});
@@ -111,3 +161,19 @@ router.get("/donations", async (req, res) => {
 });
 
 export { router as DonationRouter };
+
+// const resetNotifications = async () => {
+//   try {
+//     await Donation.updateMany(
+//       { 'notifications.status': { $ne: 'Pending' } },
+//       { $set: { 'notifications.$[].status': 'Pending' } }
+//     );
+//     console.log('Notification statuses reset successfully.');
+//   } catch (error) {
+//     console.error('Error resetting notification statuses:', error);
+//   } finally {
+//     mongoose.connection.close();
+//   }
+// };
+
+// resetNotifications();
